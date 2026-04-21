@@ -81,7 +81,7 @@
     <span class="src active">✓ #ask-parcels</span>
     <span class="src na">— TDD DashLink (Sun)</span>
     <span class="src warn">⚠ Gmail EOS (4/9)</span>
-    <span class="src warn">⚠ Sheets (OAuth expired)</span>
+    <span class="src active">✓ Google Sheets</span>
     <span class="src active">✓ Hub Vol (CSV)</span>
     <span class="src active">✓ War Room</span>
   </div>
@@ -92,7 +92,7 @@
   <div class="kpi"><div class="label">Network OTD % (4/20)</div><div class="val" style="color:var(--red)">81.21%</div><div class="sub">49,105 on-time / 60,466 delivered (Snowflake)</div></div>
   <div class="kpi"><div class="label"># of Hub EOS Reports Received</div><div class="val" style="color:var(--yellow)">4 / 9</div><div class="sub">DTX-1, EWR-2, LAX-11, LAX-12</div></div>
   <div class="kpi"><div class="label">Sites w/ Ask-Parcels Tickets</div><div class="val">1</div><div class="sub">1 P1</div></div>
-  <div class="kpi"><div class="label">LiveOps Tracker</div><div class="val pending-text">—</div><div class="sub">Sheets OAuth expired</div></div>
+  <div class="kpi"><div class="label">LiveOps Tracker</div><div class="val">15</div><div class="sub">5 Sheet · 6 Roll · 4 Pass Down</div></div>
   <div class="kpi"><div class="label">Spokes w/ OTD Miss &gt;5%</div><div class="val" style="color:var(--red)">27</div><div class="sub">of 51 spokes (4/20 TDD)</div></div>
   <div class="kpi"><div class="label">Clean Spokes (OTD ≤5%)</div><div class="val" style="color:var(--green)">24</div><div class="sub">miss rate ≤ 5%</div></div>
 </div>
@@ -153,7 +153,7 @@
         <td class="eos-ok">Received</td>
         <td><strong style="color:var(--red)">35 pallets rolled (STORD 15 / GCO 7 / FPK 13).</strong> Pushed sort to 9:30pm. Outbound late — Best Buy truck breakdown blocked dock. GRE-1 wrong truck loaded, had to reload. 200 gaylords per vendor (FPK, Uline, A&I, local) scheduled for 4/21 delivery. Get-clean target: EOD 4/22. nGroup/Broadrange tension on staffing cap &amp; pay.</td>
         <td class="clean">—</td>
-        <td>War Room — Clean on backlog rolled into 4/20; processing net new. TikTok, H&amp;M, STORD, BuiltBar largest roll. 800 gaylords tracking for 4/21 (first set ETA 11am–12pm EST).</td>
+        <td>Roll — STORD 15 plts (backlog) + GCO-1 7 plts (backlog) + FPK-1 13 plts (backlog)<br>Pass Down — TikTok NJ driver check-in issue; GCO→EWR-2 ad hoc pending WARP carrier; FPK-1→EWR-2 truck starting issues<br>War Room — Clean on backlog rolled into 4/20; 800 gaylords tracking for 4/21 (ETA 11am–12pm EST).</td>
       </tr>
       <tr>
         <td class="site-col">FPK-1</td>
@@ -165,7 +165,7 @@
         <td class="eos-miss">Missing</td>
         <td class="clean">—</td>
         <td class="clean">—</td>
-        <td>War Room — Lane disruption FPK-1→EWR-2 tracked</td>
+        <td>Roll — FPK-1→EWR-2: 13 plts rolled (backlog, from 4/19)<br>Pass Down — EWR-2→FPK-1 truck manual regen stop; FPK-1→EWR-2 truck starting issues; READYSET-IL-1→FPK-1 load not ready, driver told to return 16:30; WARP upgrading FPK→COL-5 to 53ft</td>
       </tr>
       <tr>
         <td class="site-col">GCO-1</td>
@@ -177,7 +177,7 @@
         <td class="eos-miss">Missing</td>
         <td class="clean">—</td>
         <td class="clean">—</td>
-        <td>War Room — Finished for evening, no issues. Asked to cancel 3rd EWR-2 truck after 75% sorted.</td>
+        <td>Roll — GCO-1→EWR-2: 7 plts rolled (backlog)<br>Pass Down — GCO→EWR-2 ad hoc pending WARP carrier<br>War Room — Finished for evening, no issues. Asked to cancel 3rd EWR-2 truck after 75% sorted.</td>
       </tr>
       <tr>
         <td class="site-col">LAX-11</td>
@@ -189,7 +189,7 @@
         <td class="eos-ok">Received</td>
         <td>EBY-3 Zone C label issues (A728/CAEE/O9DC) → 1 pallet rollover. Multiple late OB departures: CLV-1→SAC-4 (30m), PHX-8 (32m), SND-3 (16m), LAX-9 (19m), OCO-1 (25m), LAX-8 (12m), LAS-3 (13m), LAV-5 (1m).</td>
         <td><span class="tag tag-p1">P1</span> Multiple OB trucks stuck in Loading — Print BOL error + action menu greyed out</td>
-        <td>War Room — Lane disruption LAX-11→EBY-3 (Bally)</td>
+        <td>Roll — LAX-11→EBY-3 (Bally): couldn't source adhoc, truck capacity<br>Pass Down — Tech issues releasing trucks in sort app → most lanes showing late departure; rolling pallets for EBY-3; LAX-11→PHX-8 late (traffic collision)</td>
       </tr>
       <tr>
         <td class="site-col">LAX-12</td>
@@ -250,7 +250,14 @@
     </thead>
     <tbody>
       <tr><td class="site-col">ATL-11</td><td>Staples</td><td style="text-align:center; color:var(--green); font-weight:600">1.25%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
-      <tr><td class="site-col">ATL-12</td><td>Staples</td><td style="text-align:center; color:var(--green); font-weight:600">1.05%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
+      <tr>
+        <td class="site-col">ATL-12</td>
+        <td>Staples</td>
+        <td style="text-align:center; color:var(--green); font-weight:600">1.05%</td>
+        <td class="clean">—</td>
+        <td class="clean">—</td>
+        <td>Proactive Replan — 16 parcels</td>
+      </tr>
       <tr><td class="site-col">ATX-5</td><td>Staples</td><td style="text-align:center; color:var(--red); font-weight:600">33.89%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
       <tr><td class="site-col">BKN-9</td><td>BoxHero</td><td style="text-align:center; color:var(--red); font-weight:600">42.51%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
       <tr><td class="site-col">BLT-3</td><td>Staples</td><td style="text-align:center; color:var(--red); font-weight:600">24.02%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
@@ -263,23 +270,44 @@
       <tr><td class="site-col">CLT-3</td><td>Staples</td><td style="text-align:center; color:var(--green); font-weight:600">1.09%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
       <tr><td class="site-col">CLV-1</td><td>Staples</td><td style="text-align:center; color:var(--green); font-weight:600">1.79%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
       <tr><td class="site-col">CNJ-2</td><td>Staples</td><td style="text-align:center; color:var(--red); font-weight:600">38.37%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
-      <tr><td class="site-col">COL-5</td><td>Staples</td><td style="text-align:center; color:var(--green); font-weight:600">3.63%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
+      <tr>
+        <td class="site-col">COL-5</td>
+        <td>Staples</td>
+        <td style="text-align:center; color:var(--green); font-weight:600">3.63%</td>
+        <td class="clean">—</td>
+        <td class="clean">—</td>
+        <td>Pass Down — WARP upgrading FPK→COL-5 to 53ft truck</td>
+      </tr>
       <tr><td class="site-col">DAL-8</td><td>Staples</td><td style="text-align:center; color:var(--red); font-weight:600">34.23%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
       <tr><td class="site-col">DAL-9</td><td>Razr</td><td style="text-align:center; color:var(--red); font-weight:600">35.94%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
       <tr><td class="site-col">DCA-5</td><td>Staples</td><td style="text-align:center; color:var(--red); font-weight:600">25.74%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
-      <tr><td class="site-col">DET-13</td><td>Staples</td><td style="text-align:center; color:var(--green); font-weight:600">0.87%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
+      <tr>
+        <td class="site-col">DET-13</td>
+        <td>Staples</td>
+        <td style="text-align:center; color:var(--green); font-weight:600">0.87%</td>
+        <td class="clean">—</td>
+        <td class="clean">—</td>
+        <td>Proactive Replan — 22 parcels</td>
+      </tr>
       <tr>
         <td class="site-col">EBY-3</td>
         <td>Dedicated</td>
         <td style="text-align:center; color:var(--green); font-weight:600">1.34%</td>
         <td class="clean">—</td>
         <td class="clean">—</td>
-        <td>LAX-11 EOS — Zone C label issues (A728/CAEE/O9DC), 1 pallet rollover. Lane disruption LAX-11→EBY-3 (Bally).</td>
+        <td>Roll — LAX-11→EBY-3 (Bally): truck capacity, couldn't source adhoc<br>LAX-11 EOS — Zone C label issues (A728/CAEE/O9DC), 1 pallet rollover</td>
       </tr>
       <tr><td class="site-col">HBG-2</td><td>Staples</td><td style="text-align:center; color:var(--red); font-weight:600">35.03%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
       <tr><td class="site-col">HFD-3</td><td>Staples</td><td style="text-align:center; color:var(--red); font-weight:600">25.77%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
       <tr><td class="site-col">HGR-1</td><td>Staples</td><td style="text-align:center; color:var(--red); font-weight:600">22.42%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
-      <tr><td class="site-col">HOU-10</td><td>Staples</td><td style="text-align:center; color:var(--red); font-weight:600">32.53%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
+      <tr>
+        <td class="site-col">HOU-10</td>
+        <td>Staples</td>
+        <td style="text-align:center; color:var(--red); font-weight:600">32.53%</td>
+        <td class="clean">—</td>
+        <td class="clean">—</td>
+        <td>Proactive Replan — 23 parcels (resolved)</td>
+      </tr>
       <tr><td class="site-col">HUD-1</td><td>Staples</td><td style="text-align:center; color:var(--red); font-weight:600">23.01%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
       <tr><td class="site-col">INE-11</td><td>Staples</td><td style="text-align:center; color:var(--green); font-weight:600">3.52%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
       <tr><td class="site-col">JAX-2</td><td>Staples</td><td style="text-align:center; color:var(--green); font-weight:600">0.69%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
@@ -296,10 +324,31 @@
       <tr><td class="site-col">OCO-1</td><td>Razr</td><td style="text-align:center; color:var(--green); font-weight:600">1.94%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
       <tr><td class="site-col">ORL-3</td><td>Staples</td><td style="text-align:center; color:var(--green); font-weight:600">1.47%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
       <tr><td class="site-col">PHL-7</td><td>Staples</td><td style="text-align:center; color:var(--red); font-weight:600">38.60%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
-      <tr><td class="site-col">PHL-8</td><td>Flexe</td><td style="text-align:center; color:var(--red); font-weight:600">34.24%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
-      <tr><td class="site-col">PHX-8</td><td>Staples</td><td style="text-align:center; color:var(--green); font-weight:600">1.18%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
+      <tr>
+        <td class="site-col">PHL-8</td>
+        <td>Flexe</td>
+        <td style="text-align:center; color:var(--red); font-weight:600">34.24%</td>
+        <td class="clean">—</td>
+        <td class="clean">—</td>
+        <td>Proactive Replan — 59 parcels</td>
+      </tr>
+      <tr>
+        <td class="site-col">PHX-8</td>
+        <td>Staples</td>
+        <td style="text-align:center; color:var(--green); font-weight:600">1.18%</td>
+        <td class="clean">—</td>
+        <td class="clean">—</td>
+        <td>Pass Down — LAX-11→PHX-8 late arrival (traffic collision); LAX-12→PHX-8 truck starting issues</td>
+      </tr>
       <tr><td class="site-col">PIT-2</td><td>Staples</td><td style="text-align:center; color:var(--red); font-weight:600">35.57%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
-      <tr><td class="site-col">QNS-2</td><td>Staples</td><td style="text-align:center; color:var(--red); font-weight:600">39.89%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
+      <tr>
+        <td class="site-col">QNS-2</td>
+        <td>Staples</td>
+        <td style="text-align:center; color:var(--red); font-weight:600">39.89%</td>
+        <td class="clean">—</td>
+        <td class="clean">—</td>
+        <td>Proactive Replan — 24 parcels</td>
+      </tr>
       <tr><td class="site-col">RAL-3</td><td>Staples</td><td style="text-align:center; color:var(--red); font-weight:600">6.74%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
       <tr><td class="site-col">RIC-2</td><td>Staples</td><td style="text-align:center; color:var(--red); font-weight:600">60.33%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
       <tr><td class="site-col">SAC-4</td><td>Staples</td><td style="text-align:center; color:var(--green); font-weight:600">0.41%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
@@ -312,7 +361,7 @@
 </div>
 
 <div class="footer">
-  Parcel Core Ops Daily Site Review &nbsp;•&nbsp; Op Day 4/21/2026 (Monday) &nbsp;•&nbsp; Sources: Snowflake OTD (TDD 4/20) · Hub Vol CSV · Gmail EOS (4/9) · #ask-parcels (1 P1) · War Room · ⚠ Sheets OAuth expired — LiveOps/Roll/Pass Down pending
+  Parcel Core Ops Daily Site Review &nbsp;•&nbsp; Op Day 4/21/2026 (Monday) &nbsp;•&nbsp; Sources: Snowflake OTD (TDD 4/20) · Hub Vol CSV · Gmail EOS (4/9) · #ask-parcels (1 P1) · War Room · Google Sheets (5 LiveOps · 6 Roll · 4 Pass Down)
 </div>
 
 </body>
