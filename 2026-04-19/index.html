@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parcel Ops Daily Scorecard — 4/19/2026</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23FF3008'/%3E%3Cpath d='M8 12l8-5 8 5v10l-8 5-8-5z' fill='none' stroke='white' stroke-width='2' stroke-linejoin='round'/%3E%3Cpath d='M16 17v10M8 12l8 5 8-5' fill='none' stroke='white' stroke-width='2' stroke-linejoin='round'/%3E%3C/svg%3E">
+<style>
+  :root {
+    --bg: #0f1117; --surface: #161923; --card: #1c2030; --border: #272d42;
+    --text: #e2e4ef; --dim: #7b82a0; --accent: #6c8cff;
+    --green: #34d399; --yellow: #fbbf24; --red: #f87171; --orange: #fb923c;
+    --purple: #a78bfa; --blue: #60a5fa; --teal: #2dd4bf;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, sans-serif; background: var(--bg); color: var(--text); }
+
+  .topbar { background: var(--surface); border-bottom: 1px solid var(--border); padding: 1.25rem 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: .75rem; }
+  .topbar h1 { font-size: 1.25rem; font-weight: 700; letter-spacing: -.01em; }
+  .topbar .meta { font-size: .78rem; color: var(--dim); }
+  .sources { display: flex; gap: .4rem; flex-wrap: wrap; }
+  .src { font-size: .62rem; padding: .15rem .5rem; border-radius: 999px; border: 1px solid var(--border); color: var(--dim); text-transform: uppercase; letter-spacing: .04em; }
+  .src.active { border-color: var(--green); color: var(--green); }
+  .src.warn { border-color: var(--yellow); color: var(--yellow); }
+  .src.na { border-color: var(--border); color: var(--dim); opacity: .5; }
+
+  .kpi-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: .75rem; padding: 1rem 2rem; background: var(--surface); border-bottom: 1px solid var(--border); }
+  .kpi { background: var(--card); border: 1px solid var(--border); border-radius: .6rem; padding: .75rem 1rem; }
+  .kpi .label { font-size: .62rem; text-transform: uppercase; letter-spacing: .05em; color: var(--dim); margin-bottom: .2rem; }
+  .kpi .val { font-size: 1.3rem; font-weight: 800; }
+  .kpi .sub { font-size: .68rem; color: var(--dim); }
+
+  .section { padding: 1rem 2rem .5rem; }
+  .section-head { display: flex; align-items: center; gap: .6rem; margin-bottom: .5rem; }
+  .section-head h2 { font-size: 1rem; font-weight: 700; }
+  .badge { font-size: .58rem; padding: .12rem .45rem; border-radius: 999px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; }
+  .badge-hub { background: rgba(108,140,255,.15); color: var(--accent); }
+  .badge-spoke { background: rgba(167,139,250,.15); color: var(--purple); }
+
+  table { width: 100%; border-collapse: collapse; font-size: .78rem; }
+  thead th { text-align: left; padding: .5rem .6rem; font-size: .62rem; text-transform: uppercase; letter-spacing: .05em; color: var(--dim); border-bottom: 2px solid var(--border); position: sticky; top: 0; background: var(--bg); z-index: 2; }
+  tbody td { padding: .55rem .6rem; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.45; }
+  tbody tr:hover { background: rgba(108,140,255,.04); }
+  .site-col { font-weight: 700; font-size: .85rem; white-space: nowrap; min-width: 65px; }
+
+  .tag { display: inline-block; font-size: .6rem; font-weight: 700; padding: .1rem .35rem; border-radius: .25rem; margin-right: .25rem; text-transform: uppercase; letter-spacing: .03em; vertical-align: middle; }
+  .tag-p1 { background: rgba(248,113,113,.15); color: var(--red); }
+  .tag-tdd { background: rgba(167,139,250,.15); color: var(--purple); }
+  .tag-eos { background: rgba(52,211,153,.15); color: var(--green); }
+  .tag-new { background: rgba(52,211,153,.15); color: var(--green); }
+  .tag-alert { background: rgba(248,113,113,.2); color: var(--red); }
+
+  .eos-ok { color: var(--green); }
+  .eos-miss { color: var(--red); font-weight: 600; }
+  .clean { color: var(--dim); font-style: italic; }
+  .pending-text { color: var(--yellow); font-style: italic; }
+
+  .footer { text-align: center; padding: 1.5rem; color: var(--dim); font-size: .7rem; border-top: 1px solid var(--border); margin-top: 1rem; }
+
+  @media (max-width: 900px) { .topbar, .kpi-row, .section { padding-left: .75rem; padding-right: .75rem; } }
+  @media print {
+    body { background: #fff; color: #1a1a1a; }
+    .topbar, .kpi-row, .section { background: #fff; }
+    table, th, td { border-color: #ddd; }
+    .kpi { background: #f5f5f5; border-color: #ddd; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div style="display:flex; align-items:center; gap:.75rem;">
+    <img src="https://static.cdnlogo.com/logos/d/89/doordash.svg" alt="DoorDash" style="height:14px; filter:none;" onerror="this.src='https://logo.svgcdn.com/simple-icons/doordash-dark.svg'; this.style.filter='none'; this.onerror=null;">
+    <div>
+    <h1>Parcel Core Ops — Daily Site Review</h1>
+    <div class="meta">Operational Day: Saturday, April 19, 2026 &nbsp;|&nbsp; 9 Hubs · 51 Spokes &nbsp;|&nbsp; Generated Apr 20, 2026</div>
+    </div>
+  </div>
+  <div class="sources">
+    <span class="src active">✓ #ask-parcels</span>
+    <span class="src na">— TDD DashLink (Sat)</span>
+    <span class="src warn">⚠ Gmail EOS (5/9)</span>
+    <span class="src active">✓ Google Sheet</span>
+    <span class="src active">✓ Roll Tracking</span>
+    <span class="src active">✓ Pass Down</span>
+    <span class="src active">✓ Forecast (CSV)</span>
+  </div>
+</div>
+
+<div class="kpi-row">
+  <div class="kpi"><div class="label">Network Hub CPT %</div><div class="val" style="color:var(--red)">88.5%</div><div class="sub">Avg OB CPT across 8 active hubs</div></div>
+  <div class="kpi"><div class="label">Network OTD %</div><div class="val" style="color:var(--red)">81.33%</div><div class="sub">On-time delivery across network</div></div>
+  <div class="kpi"><div class="label"># of Hub EOS Reports Received</div><div class="val" style="color:var(--yellow)">5 / 9</div><div class="sub">ATL-13, EWR-2, FPK-1, LAX-11, LAX-12</div></div>
+  <div class="kpi"><div class="label">Sites w/ Ask-Parcels Tickets</div><div class="val">1</div><div class="sub">1 P1</div></div>
+  <div class="kpi"><div class="label">LiveOps Tracker</div><div class="val">8</div><div class="sub">1 Sheet · 3 Roll · 4 Pass Down</div></div>
+  <div class="kpi"><div class="label">Sites with Issues Reported</div><div class="val" style="color:var(--orange)">9</div><div class="sub">of 60 (15%)</div></div>
+  <div class="kpi"><div class="label">Clean Sites</div><div class="val" style="color:var(--green)">51</div><div class="sub">no issues reported</div></div>
+</div>
+
+<!-- ═══════════ HUBS ═══════════ -->
+<div class="section">
+  <div class="section-head">
+    <h2>🚛 Hubs</h2>
+    <span class="badge badge-hub">9 Sites</span>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:70px">Site</th>
+        <th style="width:90px">Sort Partner</th>
+        <th style="width:85px; text-align:center">Forecast Vol</th>
+        <th style="width:85px; text-align:center">Scanned Vol</th>
+        <th style="width:70px; text-align:center">% Var</th>
+        <th style="width:80px; text-align:center">OB CPT %</th>
+        <th style="width:115px">EOS Report</th>
+        <th>EOS Notes</th>
+        <th>#ask-parcels Tickets</th>
+        <th>LiveOps Tracker</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="site-col">ATL-13</td>
+        <td>Staples</td>
+        <td style="text-align:center">6,753</td>
+        <td style="text-align:center">15,478</td>
+        <td style="text-align:center; color:var(--red); font-weight:600">+129.2%</td>
+        <td style="text-align:center; color:var(--green); font-weight:600">100.00%</td>
+        <td class="eos-ok">Received</td>
+        <td>EOS via images/Excel (Staples/Jean Jeanty). Attachment: DD EOS FC675.xlsx.</td>
+        <td class="clean">—</td>
+        <td>Roll — SmartKargo/BuiltBar 1,958 parcels from 4/18 (JFK weather/flight cancellations)<br>Pass Down — JTV-TN-1→ATL-13 carrier comms issues, waiting all day for CHR timestamps</td>
+      </tr>
+      <tr>
+        <td class="site-col">DTX-1</td>
+        <td>SpeedX</td>
+        <td style="text-align:center">8,207</td>
+        <td style="text-align:center">8,384</td>
+        <td style="text-align:center; color:var(--green); font-weight:600">+2.2%</td>
+        <td style="text-align:center; color:var(--red); font-weight:600">83.33%</td>
+        <td class="eos-miss">Missing</td>
+        <td class="clean">—</td>
+        <td><span class="tag tag-p1">P1</span> Close Dock Door 02 — Sortation on-call (PCENG-2066)</td>
+        <td>Roll — SmartKargo/BuiltBar (part of multi-site roll from 4/18)</td>
+      </tr>
+      <tr style="background:rgba(248,113,113,.06);">
+        <td class="site-col">EWR-2 <span class="tag tag-alert">⚠ ESCALATION</span></td>
+        <td>BroadRange</td>
+        <td style="text-align:center">27,927</td>
+        <td style="text-align:center">23,392</td>
+        <td style="text-align:center; color:var(--green); font-weight:600">−16.2%</td>
+        <td style="text-align:center; color:var(--red); font-weight:600">89.47%</td>
+        <td class="eos-ok">Received</td>
+        <td><strong style="color:var(--red)">3-day volume roll. ~13K unit backlog.</strong> Gaylord shortage → FPK-1 rolled 30 pallets (6 AEO + 24 GCO-1). STORD 1hr late, 11 rolled. HBG-2 late arrival 12:14. Gaylords expected Monday. Alfred escalation: "get clean" plan for 4/20 (~53K units). Rolled breakdown: STORD 3,500 / AEO 500 / GCO 1,600 / FPK 7,000.</td>
+        <td class="clean">—</td>
+        <td>Roll — STORD late again (11 units) + FPK-1→EWR-2 30 pallets (gaylord shortage)<br>Pass Down — 60+ pallets rolled total; BuiltBar arrived not on inbound page</td>
+      </tr>
+      <tr>
+        <td class="site-col">FPK-1</td>
+        <td>Staples</td>
+        <td style="text-align:center" class="clean">—</td>
+        <td style="text-align:center">44,541</td>
+        <td style="text-align:center" class="clean">—</td>
+        <td style="text-align:center; color:var(--red); font-weight:600">45.45%</td>
+        <td class="eos-ok">Received</td>
+        <td>All parcels shipped, no rollover.</td>
+        <td class="clean">—</td>
+        <td>Roll — SmartKargo/BuiltBar (multi-site roll from 4/18)<br>Pass Down — HM-IN-1→FPK-1 traffic delay; AEO-KS-1→FPK-1 mechanical failure on pickup</td>
+      </tr>
+      <tr>
+        <td class="site-col">GCO-1</td>
+        <td>Staples</td>
+        <td style="text-align:center">10,076</td>
+        <td style="text-align:center">11,711</td>
+        <td style="text-align:center; color:var(--green); font-weight:600">+16.2%</td>
+        <td style="text-align:center; color:var(--red); font-weight:600">90.00%</td>
+        <td class="eos-miss">Missing</td>
+        <td class="clean">—</td>
+        <td class="clean">—</td>
+        <td class="clean">—</td>
+      </tr>
+      <tr>
+        <td class="site-col">LAX-11</td>
+        <td>Razr</td>
+        <td style="text-align:center">8,126</td>
+        <td style="text-align:center">9,263</td>
+        <td style="text-align:center; color:var(--green); font-weight:600">+14.0%</td>
+        <td style="text-align:center; color:var(--green); font-weight:600">100.00%</td>
+        <td class="eos-ok">Received</td>
+        <td>All shipped. 16 damaged packages re-taped and shipped.</td>
+        <td class="clean">—</td>
+        <td>Roll — SmartKargo/BuiltBar (multi-site roll from 4/18)<br>Pass Down — PETCO-CA-1→LAX-11 driver departed 41m late</td>
+      </tr>
+      <tr>
+        <td class="site-col">LAX-12</td>
+        <td>Warp</td>
+        <td style="text-align:center">4,099</td>
+        <td style="text-align:center">7,069</td>
+        <td style="text-align:center; color:var(--red); font-weight:600">+72.5%</td>
+        <td style="text-align:center; color:var(--green); font-weight:600">100.00%</td>
+        <td class="eos-ok">Received</td>
+        <td>All parcels shipped, no items rolled.</td>
+        <td class="clean">—</td>
+        <td>Pass Down — LAX-12→PHX-8 truck starting issues, running behind schedule</td>
+      </tr>
+      <tr>
+        <td class="site-col">NYC-1</td>
+        <td>Staples</td>
+        <td style="text-align:center">1,244</td>
+        <td style="text-align:center">1,630</td>
+        <td style="text-align:center; color:var(--red); font-weight:600">+31.0%</td>
+        <td style="text-align:center; color:var(--green); font-weight:600">100.00%</td>
+        <td class="eos-miss">Missing</td>
+        <td class="clean">—</td>
+        <td class="clean">—</td>
+        <td class="clean">—</td>
+      </tr>
+      <tr>
+        <td class="site-col">ORD-7 <span class="tag tag-new">NEW</span></td>
+        <td>Warp</td>
+        <td style="text-align:center">27,284</td>
+        <td style="text-align:center" class="pending-text">—</td>
+        <td style="text-align:center" class="pending-text">—</td>
+        <td style="text-align:center" class="pending-text">—</td>
+        <td class="eos-miss">Missing</td>
+        <td class="clean">—</td>
+        <td class="clean">—</td>
+        <td class="clean">—</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ═══════════ SPOKES ═══════════ -->
+<div class="section">
+  <div class="section-head">
+    <h2>🚗 Spokes</h2>
+    <span class="badge badge-spoke">51 Sites</span>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:70px">Site</th>
+        <th style="width:90px">Sort Partner</th>
+        <th style="width:90px; text-align:center">Spoke OTD Miss</th>
+        <th>#ask-parcels Tickets</th>
+        <th>Staples TDD Callouts</th>
+        <th>LiveOps Tracker</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="site-col">ATL-11</td><td>Staples</td><td style="text-align:center; color:var(--green); font-weight:600">0.02%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
+      <tr><td class="site-col">ATL-12</td><td>Staples</td><td style="text-align:center; color:var(--green); font-weight:600">0.01%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
+      <tr><td class="site-col">ATX-5</td><td>Staples</td><td style="text-align:center; color:var(--green); font-weight:600">0.00%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
+      <tr><td class="site-col">BKN-9</td><td>BoxHero</td><td style="text-align:center; color:var(--green); font-weight:600">0.00%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
+      <tr><td class="site-col">BLT-3</td><td>Staples</td><td style="text-align:center; color:var(--green); font-weight:600">0.00%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
+      <tr><td class="site-col">BNX-1</td><td>Staples</td><td style="text-align:center; color:var(--green); font-weight:600">0.01%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
+      <tr><td class="site-col">BOS-5</td><td>Staples</td><td style="text-align:center; color:var(--green); font-weight:600">0.02%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
+      <tr><td class="site-col">BOS-6</td><td>Staples</td><td style="text-align:center; color:var(--green); font-weight:600">0.01%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
+      <tr><td class="site-col">CHI-17</td><td>Staples</td><td style="text-align:center; color:var(--green); font-weight:600">0.16%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
+      <tr><td class="site-col">CIN-5</td><td>Staples</td><td style="text-align:center; color:var(--green); font-weight:600">0.01%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
+      <tr><td class="site-col">CLE-7</td><td>Staples</td><td style="text-align:center; color:var(--green); font-weight:600">0.01%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
+      <tr><td class="site-col">CLT-3</td><td>Staples</td><td style="text-align:center; color:var(--green); font-weight:600">0.00%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
+      <tr><td class="site-col">CLV-1</td><td>Staples</td><td style="text-align:center; color:var(--green); font-weight:600">0.00%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
+      <tr><td class="site-col">CNJ-2</td><td>Staples</td><td style="text-align:center; color:var(--green); font-weight:600">0.00%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
+      <tr><td class="site-col">COL-5</td><td>Staples</td><td style="text-align:center; color:var(--green); font-weight:600">0.00%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
+      <tr><td class="site-col">DAL-8</td><td>Staples</td><td style="text-align:center; color:var(--green); font-weight:600">0.01%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
+      <tr><td class="site-col">DAL-9</td><td>Razr</td><td style="text-align:center; color:var(--green); font-weight:600">0.00%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
+      <tr><td class="site-col">DCA-5</td><td>Staples</td><td style="text-align:center; color:var(--green); font-weight:600">0.01%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
+      <tr><td class="site-col">DET-13</td><td>Staples</td><td style="text-align:center; color:var(--green); font-weight:600">0.04%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
+      <tr>
+        <td class="site-col">EBY-3</td>
+        <td>Dedicated</td>
+        <td style="text-align:center; color:var(--green); font-weight:600">0.00%</td>
+        <td class="clean">—</td>
+        <td class="clean">—</td>
+        <td>Roll — SmartKargo/BuiltBar flight reschedule (part of multi-site 1,958 parcel roll from 4/18)</td>
+      </tr>
+      <tr><td class="site-col">HBG-2</td><td>Staples</td><td style="text-align:center; color:var(--green); font-weight:600">0.00%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
+      <tr><td class="site-col">HFD-3</td><td>Staples</td><td style="text-align:center; color:var(--green); font-weight:600">0.00%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
+      <tr><td class="site-col">HGR-1</td><td>Staples</td><td style="text-align:center; color:var(--green); font-weight:600">0.00%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
+      <tr><td class="site-col">HOU-10</td><td>Staples</td><td style="text-align:center; color:var(--green); font-weight:600">0.00%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
+      <tr><td class="site-col">HUD-1</td><td>Staples</td><td style="text-align:center; color:var(--green); font-weight:600">0.00%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
+      <tr><td class="site-col">INE-11</td><td>Staples</td><td style="text-align:center; color:var(--green); font-weight:600">0.00%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
+      <tr><td class="site-col">JAX-2</td><td>Staples</td><td style="text-align:center; color:var(--green); font-weight:600">0.00%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
+      <tr><td class="site-col">LAS-3</td><td>Staples</td><td style="text-align:center; color:var(--green); font-weight:600">0.00%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
+      <tr><td class="site-col">LAV-5</td><td>Staples</td><td style="text-align:center; color:var(--green); font-weight:600">0.01%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
+      <tr><td class="site-col">LAX-8</td><td>Warp</td><td style="text-align:center; color:var(--green); font-weight:600">0.01%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
+      <tr><td class="site-col">LAX-9</td><td>Staples</td><td style="text-align:center; color:var(--green); font-weight:600">0.00%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
+      <tr><td class="site-col">LIN-1</td><td>Staples</td><td style="text-align:center; color:var(--green); font-weight:600">0.00%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
+      <tr><td class="site-col">MSP-4</td><td>Staples</td><td style="text-align:center; color:var(--green); font-weight:600">0.00%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
+      <tr><td class="site-col">MSP-6</td><td>Owen Allen Solutions</td><td style="text-align:center; color:var(--green); font-weight:600">0.00%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
+      <tr><td class="site-col">NAS-2</td><td>Staples</td><td style="text-align:center; color:var(--green); font-weight:600">0.00%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
+      <tr><td class="site-col">NNJ-5</td><td>Dedicated</td><td style="text-align:center; color:var(--green); font-weight:600">0.00%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
+      <tr><td class="site-col">NNJ-6</td><td>Staples</td><td style="text-align:center; color:var(--green); font-weight:600">0.01%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
+      <tr><td class="site-col">OCO-1</td><td>Razr</td><td style="text-align:center; color:var(--green); font-weight:600">0.00%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
+      <tr><td class="site-col">ORL-3</td><td>Staples</td><td style="text-align:center; color:var(--green); font-weight:600">0.01%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
+      <tr><td class="site-col">PHL-7</td><td>Staples</td><td style="text-align:center; color:var(--green); font-weight:600">0.00%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
+      <tr><td class="site-col">PHL-8</td><td>Flexe</td><td style="text-align:center; color:var(--green); font-weight:600">0.00%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
+      <tr>
+        <td class="site-col">PHX-8</td>
+        <td>Staples</td>
+        <td style="text-align:center; color:var(--green); font-weight:600">0.00%</td>
+        <td class="clean">—</td>
+        <td class="clean">—</td>
+        <td>Pass Down — LAX-12→PHX-8 truck starting issues, running behind schedule</td>
+      </tr>
+      <tr><td class="site-col">PIT-2</td><td>Staples</td><td style="text-align:center; color:var(--green); font-weight:600">0.00%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
+      <tr><td class="site-col">QNS-2</td><td>Staples</td><td style="text-align:center; color:var(--green); font-weight:600">0.01%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
+      <tr>
+        <td class="site-col">RAL-3</td>
+        <td>Staples</td>
+        <td style="text-align:center; color:var(--green); font-weight:600">0.00%</td>
+        <td class="clean">—</td>
+        <td class="clean">—</td>
+        <td>Proactive Replan — 14 parcels</td>
+      </tr>
+      <tr><td class="site-col">RIC-2</td><td>Staples</td><td style="text-align:center; color:var(--green); font-weight:600">0.00%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
+      <tr><td class="site-col">SAC-4</td><td>Staples</td><td style="text-align:center; color:var(--green); font-weight:600">0.00%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
+      <tr><td class="site-col">SAT-4</td><td>Staples</td><td style="text-align:center; color:var(--green); font-weight:600">0.00%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
+      <tr><td class="site-col">SND-3</td><td>Staples</td><td style="text-align:center; color:var(--green); font-weight:600">0.00%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
+      <tr><td class="site-col">TPA-4</td><td>Staples</td><td style="text-align:center; color:var(--green); font-weight:600">0.00%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
+      <tr><td class="site-col">VAB-4</td><td>Staples</td><td style="text-align:center; color:var(--green); font-weight:600">0.00%</td><td colspan="3" class="eos-ok" style="text-align:center; font-style:italic;">No Issues Tracked</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="footer">
+  Parcel Core Ops Daily Site Review &nbsp;•&nbsp; Op Day 4/19/2026 (Saturday) &nbsp;•&nbsp; Sources: #ask-parcels (1 ticket) · Gmail EOS (5/9) · Google Sheet (1 entry) · Roll Tracking (3 entries) · Pass Down (4 entries) · Forecast (CSV) · OTD (CSV)
+</div>
+
+</body>
+</html>
