@@ -1,0 +1,156 @@
+{
+  "target_delivery_date": "2026-04-21",
+  "folder": "2026-04-22",
+  "network": {
+    "otd_barcodes": 69466,
+    "miss_barcodes": 7166,
+    "total_barcodes": 76632,
+    "otd_pct": 90.65
+  },
+  "spoke_misses": {
+    "ORL-3": {
+      "miss_barcodes": 46,
+      "miss_pct": 0.06
+    },
+    "DET-13": {
+      "miss_barcodes": 21,
+      "miss_pct": 0.0274
+    },
+    "BOS-5": {
+      "miss_barcodes": 13,
+      "miss_pct": 0.017
+    },
+    "CHI-17": {
+      "miss_barcodes": 12,
+      "miss_pct": 0.0157
+    },
+    "ATL-12": {
+      "miss_barcodes": 10,
+      "miss_pct": 0.013
+    },
+    "MSP-4": {
+      "miss_barcodes": 10,
+      "miss_pct": 0.013
+    },
+    "CLE-7": {
+      "miss_barcodes": 10,
+      "miss_pct": 0.013
+    },
+    "ATL-11": {
+      "miss_barcodes": 6,
+      "miss_pct": 0.0078
+    },
+    "NNJ-6": {
+      "miss_barcodes": 5,
+      "miss_pct": 0.0065
+    },
+    "HFD-3": {
+      "miss_barcodes": 4,
+      "miss_pct": 0.0052
+    },
+    "COL-5": {
+      "miss_barcodes": 4,
+      "miss_pct": 0.0052
+    },
+    "PHX-8": {
+      "miss_barcodes": 4,
+      "miss_pct": 0.0052
+    },
+    "LAX-8": {
+      "miss_barcodes": 4,
+      "miss_pct": 0.0052
+    },
+    "QNS-2": {
+      "miss_barcodes": 4,
+      "miss_pct": 0.0052
+    },
+    "BOS-6": {
+      "miss_barcodes": 3,
+      "miss_pct": 0.0039
+    },
+    "CIN-5": {
+      "miss_barcodes": 3,
+      "miss_pct": 0.0039
+    },
+    "CNJ-2": {
+      "miss_barcodes": 3,
+      "miss_pct": 0.0039
+    },
+    "INE-11": {
+      "miss_barcodes": 2,
+      "miss_pct": 0.0026
+    },
+    "CLT-3": {
+      "miss_barcodes": 2,
+      "miss_pct": 0.0026
+    },
+    "PHL-8": {
+      "miss_barcodes": 2,
+      "miss_pct": 0.0026
+    },
+    "DAL-8": {
+      "miss_barcodes": 2,
+      "miss_pct": 0.0026
+    },
+    "BNX-1": {
+      "miss_barcodes": 2,
+      "miss_pct": 0.0026
+    },
+    "EBY-3": {
+      "miss_barcodes": 2,
+      "miss_pct": 0.0026
+    },
+    "NAS-2": {
+      "miss_barcodes": 2,
+      "miss_pct": 0.0026
+    },
+    "NNJ-5": {
+      "miss_barcodes": 2,
+      "miss_pct": 0.0026
+    },
+    "HOU-10": {
+      "miss_barcodes": 2,
+      "miss_pct": 0.0026
+    },
+    "HUD-1": {
+      "miss_barcodes": 2,
+      "miss_pct": 0.0026
+    },
+    "LIN-1": {
+      "miss_barcodes": 1,
+      "miss_pct": 0.0013
+    },
+    "DAL-9": {
+      "miss_barcodes": 1,
+      "miss_pct": 0.0013
+    },
+    "PIT-2": {
+      "miss_barcodes": 1,
+      "miss_pct": 0.0013
+    },
+    "BKN-9": {
+      "miss_barcodes": 1,
+      "miss_pct": 0.0013
+    },
+    "MSP-6": {
+      "miss_barcodes": 1,
+      "miss_pct": 0.0013
+    },
+    "OCO-1": {
+      "miss_barcodes": 1,
+      "miss_pct": 0.0013
+    },
+    "SAT-4": {
+      "miss_barcodes": 1,
+      "miss_pct": 0.0013
+    },
+    "JAX-2": {
+      "miss_barcodes": 1,
+      "miss_pct": 0.0013
+    },
+    "HBG-2": {
+      "miss_barcodes": 1,
+      "miss_pct": 0.0013
+    }
+  }
+}
