@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parcel Ops Daily Scorecard — 4/21/2026</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23FF3008'/%3E%3Cpath d='M8 12l8-5 8 5v10l-8 5-8-5z' fill='none' stroke='white' stroke-width='2' stroke-linejoin='round'/%3E%3Cpath d='M16 17v10M8 12l8 5 8-5' fill='none' stroke='white' stroke-width='2' stroke-linejoin='round'/%3E%3C/svg%3E">
+<style>
+  :root {
+    --bg: #0f1117; --surface: #161923; --card: #1c2030; --border: #272d42;
+    --text: #e2e4ef; --dim: #7b82a0; --accent: #6c8cff;
+    --green: #34d399; --yellow: #fbbf24; --red: #f87171; --orange: #fb923c;
+    --purple: #a78bfa; --blue: #60a5fa; --teal: #2dd4bf;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, sans-serif; background: var(--bg); color: var(--text); }
+
+  .topbar { background: var(--surface); border-bottom: 1px solid var(--border); padding: 1.25rem 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: .75rem; }
+  .topbar h1 { font-size: 1.25rem; font-weight: 700; letter-spacing: -.01em; }
+  .topbar .meta { font-size: .78rem; color: var(--dim); }
+  .sources { display: flex; gap: .4rem; flex-wrap: wrap; }
+  .src { font-size: .62rem; padding: .15rem .5rem; border-radius: 999px; border: 1px solid var(--border); color: var(--dim); text-transform: uppercase; letter-spacing: .04em; }
+  .src.active { border-color: var(--green); color: var(--green); }
+  .src.warn { border-color: var(--yellow); color: var(--yellow); }
+  .src.na { border-color: var(--border); color: var(--dim); opacity: .5; }
+
+  .kpi-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: .75rem; padding: 1rem 2rem; background: var(--surface); border-bottom: 1px solid var(--border); }
+  .kpi { background: var(--card); border: 1px solid var(--border); border-radius: .6rem; padding: .75rem 1rem; }
+  .kpi .label { font-size: .62rem; text-transform: uppercase; letter-spacing: .05em; color: var(--dim); margin-bottom: .2rem; }
+  .kpi .val { font-size: 1.3rem; font-weight: 800; }
+  .kpi .sub { font-size: .68rem; color: var(--dim); }
+
+  .section { padding: 1rem 2rem .5rem; }
+  .section-head { display: flex; align-items: center; gap: .6rem; margin-bottom: .5rem; }
+  .section-head h2 { font-size: 1rem; font-weight: 700; }
+  .badge { font-size: .58rem; padding: .12rem .45rem; border-radius: 999px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; }
+  .badge-hub { background: rgba(108,140,255,.15); color: var(--accent); }
+  .badge-spoke { background: rgba(167,139,250,.15); color: var(--purple); }
+
+  table { width: 100%; border-collapse: collapse; font-size: .78rem; }
+  thead th { text-align: left; padding: .5rem .6rem; font-size: .62rem; text-transform: uppercase; letter-spacing: .05em; color: var(--dim); border-bottom: 2px solid var(--border); position: sticky; top: 0; background: var(--bg); z-index: 2; }
+  tbody td { padding: .55rem .6rem; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.45; }
+  tbody tr:hover { background: rgba(108,140,255,.04); }
+  .site-col { font-weight: 700; font-size: .85rem; white-space: nowrap; min-width: 65px; }
+
+  .tag { display: inline-block; font-size: .6rem; font-weight: 700; padding: .1rem .35rem; border-radius: .25rem; margin-right: .25rem; text-transform: uppercase; letter-spacing: .03em; vertical-align: middle; }
+  .tag-p1 { background: rgba(248,113,113,.15); color: var(--red); }
+  .tag-tdd { background: rgba(167,139,250,.15); color: var(--purple); }
+  .tag-eos { background: rgba(52,211,153,.15); color: var(--green); }
+  .tag-new { background: rgba(52,211,153,.15); color: var(--green); }
+  .tag-alert { background: rgba(248,113,113,.2); color: var(--red); }
+
+  .eos-ok { color: var(--green); }
+  .eos-miss { color: var(--red); font-weight: 600; }
+  .clean { color: var(--dim); font-style: italic; }
+  .pending-text { color: var(--yellow); font-style: italic; }
+
+  .footer { text-align: center; padding: 1.5rem; color: var(--dim); font-size: .7rem; border-top: 1px solid var(--border); margin-top: 1rem; }
+
+  @media (max-width: 900px) { .topbar, .kpi-row, .section { padding-left: .75rem; padding-right: .75rem; } }
+  @media print {
+    body { background: #fff; color: #1a1a1a; }
+    .topbar, .kpi-row, .section { background: #fff; }
+    table, th, td { border-color: #ddd; }
+    .kpi { background: #f5f5f5; border-color: #ddd; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div style="display:flex; align-items:center; gap:.75rem;">
+    <img src="https://static.cdnlogo.com/logos/d/89/doordash.svg" alt="DoorDash" style="height:14px; filter:none;" onerror="this.src='https://logo.svgcdn.com/simple-icons/doordash-dark.svg'; this.style.filter='none'; this.onerror=null;">
+    <div>
+    <h1>Parcel Core Ops — Daily Site Review</h1>
+    <div class="meta">Operational Day: Tuesday, April 22, 2026 &nbsp;|&nbsp; 9 Hubs · 51 Spokes &nbsp;|&nbsp; Generated Apr 21, 2026</div>
+    </div>
+  </div>
+  <div class="sources">
+    <span class="src active">⚠ OTD (pending CSV)</span>
+    <span class="src active">✓ #ask-parcels</span>
+    <span class="src na">✓ TDD DashLink (none)</span>
+    <span class="src warn">✓ Gmail EOS (4/21)</span>
+    <span class="src active">✓ Google Sheets</span>
+    <span class="src active">⚠ Hub Vol (pending CSV)</span>
+    <span class="src active">✓ War Room</span>
+  </div>
+</div>
+
+<div class="kpi-row">
+  <div class="kpi"><div class="label">Network OTD %</div><div class="val pending-text">—</div><div class="sub">Pending CSV</div></div>
+  <div class="kpi"><div class="label">Network Hub CPT %</div><div class="val pending-text">—</div><div class="sub">Pending CSV</div></div>
+  <div class="kpi"><div class="label">Spoke Forecast Var %</div><div class="val pending-text">—</div><div class="sub">Pending CSV</div></div>
+  <div class="kpi"><div class="label">Hub Forecast Var %</div><div class="val pending-text">—</div><div class="sub">Pending CSV</div></div>
+  <div class="kpi"><div class="label"># Spokes w/OTD Miss &gt;5%</div><div class="val pending-text">—</div><div class="sub">Pending CSV</div></div>
+  <div class="kpi"><div class="label"># Clean Spokes w/OTD Miss &lt;5%</div><div class="val pending-text">—</div><div class="sub">Pending CSV</div></div>
+  <div class="kpi"><div class="label"># of Hub EOS Reports Received</div><div class="val" style="color:var(--yellow)">6 / 9</div><div class="sub">ATL-13, DTX-1, EWR-2, FPK-1, LAX-11, LAX-12</div></div>
+  <div class="kpi"><div class="label"># of Sites w/Ask-Parcel Tickets</div><div class="val">1</div><div class="sub">1 P1 (LAX-11)</div></div>
+  <div class="kpi"><div class="label"># Liveops Tracked Events</div><div class="val">10</div><div class="sub">7 Roll · 3 Pass Down</div></div>
+</div>
+<div class="section" style="margin-top:1.2rem; margin-bottom:0;">
+  <div class="section-head">
+    <h2>📋 Operations Summary — 4/21</h2>
+  </div>
+  <div style="background:var(--card); border:1px solid var(--border); border-radius:10px; padding:1rem 1.4rem; font-size:.85rem; line-height:1.7; color:var(--text);">
+    <em class="pending-text">Pending — will be generated once all data sources are collected.</em>
+  </div>
+</div>
+
+<!-- ═══════════ HUBS ═══════════ -->
+<div class="section">
+  <div class="section-head">
+    <h2>🚛 Hubs</h2>
+    <span class="badge badge-hub">9 Sites</span>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:70px">Site</th>
+        <th style="width:90px">Sort Partner</th>
+        <th style="width:85px; text-align:center">Forecast Vol</th>
+        <th style="width:85px; text-align:center">Scanned Vol</th>
+        <th style="width:70px; text-align:center">% Var</th>
+        <th style="width:80px; text-align:center">OB CPT %</th>
+        <th style="width:115px">EOS Report</th>
+        <th>EOS Notes</th>
+        <th>#ask-parcels Tickets</th>
+        <th>LiveOps Tracker</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="site-col">ATL-13</td>
+        <td>Staples</td>
+        <td class="pending-text" style="text-align:center">—</td>
+        <td class="pending-text" style="text-align:center">—</td>
+        <td class="pending-text" style="text-align:center">—</td>
+        <td class="pending-text" style="text-align:center">—</td>
+        <td class="eos-ok">Received</td>
+        <td>EOS received (image-based report).</td>
+        <td style="text-align:center">-</td>
+        <td>-</td>
+      </tr>
+      <tr>
+        <td class="site-col">DTX-1</td>
+        <td>Staples</td>
+        <td class="pending-text" style="text-align:center">—</td>
+        <td class="pending-text" style="text-align:center">—</td>
+        <td class="pending-text" style="text-align:center">—</td>
+        <td class="pending-text" style="text-align:center">—</td>
+        <td class="eos-ok">Received</td>
+        <td>Sort down 20:45. Sorted 8,244. <strong style="color:var(--red)">2 LAX pallets rolled</strong> (truck capacity).</td>
+        <td style="text-align:center">-</td>
+        <td>Roll &mdash; DTX-1&rarr;LAX-11 (Bally, DLJ8LABEWXEVIL5, 2 plts)<br>Pass Down &mdash; DTX-1 rolled 2 plts for LAX-11 (truck capacity)</td>
+      </tr>
+      <tr>
+        <td class="site-col">EWR-2 <span class="tag tag-alert">⚠ ESCALATION</span></td>
+        <td>BroadRange</td>
+        <td class="pending-text" style="text-align:center">—</td>
+        <td class="pending-text" style="text-align:center">—</td>
+        <td class="pending-text" style="text-align:center">—</td>
+        <td class="pending-text" style="text-align:center">—</td>
+        <td class="eos-ok">Received</td>
+        <td><strong style="color:var(--red)">STORD 18 pallets rolled</strong> (1hr late arrival). FPK-1 truck mechanical issues (arrived 00:40). GCO 36min late. Built Bar 1hr late. Outbounds late &mdash; sort pushed to 10 PM.</td>
+        <td style="text-align:center">-</td>
+        <td>Roll &mdash; STORD&rarr;EWR-2 (18 plts, Sort); FPK-1&rarr;EWR-2 (Bally)<br>Pass Down &mdash; STORD&rarr;EWR-2 rollover; FPK-2&rarr;EWR-2 rollover; CHR carrier broke down (NYC-1&rarr;LIN-1/BNX-1 missed)</td>
+      </tr>
+      <tr>
+        <td class="site-col">FPK-1</td>
+        <td>Staples</td>
+        <td class="pending-text" style="text-align:center">—</td>
+        <td class="pending-text" style="text-align:center">—</td>
+        <td class="pending-text" style="text-align:center">—</td>
+        <td class="pending-text" style="text-align:center">—</td>
+        <td class="eos-ok">Received</td>
+        <td>All pallets/parcels shipped, no rollover.</td>
+        <td style="text-align:center">-</td>
+        <td>Roll &mdash; FPK-1&rarr;COL-5 (Warp, closed); FPK-1&rarr;EWR-2 (Bally, 57370)<br>Pass Down &mdash; Bally timestamp issues; EWR-2&harr;FPK-1 swaps; Late FM HM-IN-1&rarr;FPK-1 (traffic)</td>
+      </tr>
+      <tr>
+        <td class="site-col">GCO-1</td>
+        <td>Staples</td>
+        <td class="pending-text" style="text-align:center">—</td>
+        <td class="pending-text" style="text-align:center">—</td>
+        <td class="pending-text" style="text-align:center">—</td>
+        <td class="pending-text" style="text-align:center">—</td>
+        <td class="eos-miss">Missing</td>
+        <td><span class="pending-text">—</span></td>
+        <td style="text-align:center">-</td>
+        <td>Roll &mdash; GCO-1&rarr;ORD-7 (Bally, DLPPZBHXR4NTXI6)</td>
+      </tr>
+      <tr>
+        <td class="site-col">LAX-11</td>
+        <td>Dedicated</td>
+        <td class="pending-text" style="text-align:center">—</td>
+        <td class="pending-text" style="text-align:center">—</td>
+        <td class="pending-text" style="text-align:center">—</td>
+        <td class="pending-text" style="text-align:center">—</td>
+        <td class="eos-ok">Received</td>
+        <td>No rollover; all parcels processed and shipped.</td>
+        <td style="text-align:center">-</td>
+        <td>Roll &mdash; SmartKargo&rarr;LAX-11 (DI); DTX-1&rarr;LAX-11 (Bally, 2 plts)<br>Pass Down &mdash; Scanning/loading issues led to late departures; adhoc LAX-11&rarr;INE-11 via LAV-5 driver</td>
+      </tr>
+      <tr>
+        <td class="site-col">LAX-12</td>
+        <td>Staples</td>
+        <td class="pending-text" style="text-align:center">—</td>
+        <td class="pending-text" style="text-align:center">—</td>
+        <td class="pending-text" style="text-align:center">—</td>
+        <td class="pending-text" style="text-align:center">—</td>
+        <td class="eos-ok">Received</td>
+        <td>All parcels shipped, no items rolled.</td>
+        <td style="text-align:center">-</td>
+        <td>Pass Down &mdash; BuiltBar/Uniqlo&rarr;LAX-12 SK airport pickup delays, delivering next day 08:00-10:00</td>
+      </tr>
+      <tr>
+        <td class="site-col">NYC-1</td>
+        <td>Staples</td>
+        <td class="pending-text" style="text-align:center">—</td>
+        <td class="pending-text" style="text-align:center">—</td>
+        <td class="pending-text" style="text-align:center">—</td>
+        <td class="pending-text" style="text-align:center">—</td>
+        <td class="eos-miss">Missing</td>
+        <td><span class="pending-text">—</span></td>
+        <td style="text-align:center">-</td>
+        <td>Roll &mdash; NYC-1&rarr;LIN-1/BNX-1 (CHR truck broke down, carrier no-comm)<br>Pass Down &mdash; CHR carrier truck broke down; LIN-1 &amp; BNX-1 notified of no load tonight</td>
+      </tr>
+      <tr>
+        <td class="site-col">ORD-7 <span class="tag tag-new">NEW</span></td>
+        <td>Warp</td>
+        <td class="pending-text" style="text-align:center">—</td>
+        <td class="pending-text" style="text-align:center">—</td>
+        <td class="pending-text" style="text-align:center">—</td>
+        <td class="pending-text" style="text-align:center">—</td>
+        <td class="eos-miss">Missing</td>
+        <td><span class="pending-text">—</span></td>
+        <td style="text-align:center">-</td>
+        <td>-</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ═══════════ SPOKES ═══════════ -->
+<div class="section">
+  <div class="section-head">
+    <h2>🚗 Spokes</h2>
+    <span class="badge badge-spoke">51 Sites</span>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:70px">Site</th>
+        <th style="width:90px">Sort Partner</th>
+        <th style="width:85px; text-align:center">Forecast Vol</th>
+        <th style="width:85px; text-align:center">Scanned Vol</th>
+        <th style="width:70px; text-align:center">% Var</th>
+        <th style="width:100px; text-align:center">OTD Miss Attrib.</th>
+        <th>#ask-parcels Tickets</th>
+        <th>Staples TDD Callouts</th>
+        <th>LiveOps Tracker</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="site-col">ATL-11</td><td>Staples</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td>-</td><td style="text-align:center">-</td><td style="font-style:italic; color:var(--green)">No Issues Tracked</td></tr>
+      <tr><td class="site-col">ATL-12</td><td>Staples</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td>-</td><td style="text-align:center">-</td><td style="font-style:italic; color:var(--green)">No Issues Tracked</td></tr>
+      <tr><td class="site-col">ATX-5</td><td>Staples</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td>-</td><td style="text-align:center">-</td><td style="font-style:italic; color:var(--green)">No Issues Tracked</td></tr>
+      <tr><td class="site-col">BKN-9</td><td>BoxHero</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td>-</td><td style="text-align:center">-</td><td style="font-style:italic; color:var(--green)">No Issues Tracked</td></tr>
+      <tr><td class="site-col">BLT-3</td><td>Staples</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td>-</td><td style="text-align:center">-</td><td style="font-style:italic; color:var(--green)">No Issues Tracked</td></tr>
+      <tr><td class="site-col">BNX-1</td><td>Staples</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td>-</td><td style="text-align:center">-</td><td>Pass Down &mdash; CHR carrier broke down; no load from NYC-1 tonight</td></tr>
+      <tr><td class="site-col">BOS-5</td><td>Staples</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td>-</td><td style="text-align:center">-</td><td style="font-style:italic; color:var(--green)">No Issues Tracked</td></tr>
+      <tr><td class="site-col">BOS-6</td><td>Staples</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td>-</td><td style="text-align:center">-</td><td style="font-style:italic; color:var(--green)">No Issues Tracked</td></tr>
+      <tr><td class="site-col">CHI-17</td><td>Staples</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td>-</td><td style="text-align:center">-</td><td style="font-style:italic; color:var(--green)">No Issues Tracked</td></tr>
+      <tr><td class="site-col">CIN-5</td><td>Staples</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td>-</td><td style="text-align:center">-</td><td style="font-style:italic; color:var(--green)">No Issues Tracked</td></tr>
+      <tr><td class="site-col">CLE-7</td><td>Staples</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td>-</td><td style="text-align:center">-</td><td style="font-style:italic; color:var(--green)">No Issues Tracked</td></tr>
+      <tr><td class="site-col">CLT-3</td><td>Staples</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td>-</td><td style="text-align:center">-</td><td style="font-style:italic; color:var(--green)">No Issues Tracked</td></tr>
+      <tr><td class="site-col">CLV-1</td><td>Staples</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td>-</td><td style="text-align:center">-</td><td style="font-style:italic; color:var(--green)">No Issues Tracked</td></tr>
+      <tr><td class="site-col">CNJ-2</td><td>Staples</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td>-</td><td style="text-align:center">-</td><td style="font-style:italic; color:var(--green)">No Issues Tracked</td></tr>
+      <tr><td class="site-col">COL-5</td><td>Staples</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td>-</td><td style="text-align:center">-</td><td>Roll &mdash; FPK-1&rarr;COL-5 (Warp, closed)</td></tr>
+      <tr><td class="site-col">DAL-8</td><td>Staples</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td>-</td><td style="text-align:center">-</td><td style="font-style:italic; color:var(--green)">No Issues Tracked</td></tr>
+      <tr><td class="site-col">DAL-9</td><td>Razr</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td>-</td><td style="text-align:center">-</td><td style="font-style:italic; color:var(--green)">No Issues Tracked</td></tr>
+      <tr><td class="site-col">DCA-5</td><td>Staples</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td>-</td><td style="text-align:center">-</td><td style="font-style:italic; color:var(--green)">No Issues Tracked</td></tr>
+      <tr><td class="site-col">DET-13</td><td>Staples</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td>-</td><td style="text-align:center">-</td><td style="font-style:italic; color:var(--green)">No Issues Tracked</td></tr>
+      <tr><td class="site-col">EBY-3</td><td>Dedicated</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td>-</td><td style="text-align:center">-</td><td style="font-style:italic; color:var(--green)">No Issues Tracked</td></tr>
+      <tr><td class="site-col">HBG-2</td><td>Staples</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td>-</td><td style="text-align:center">-</td><td style="font-style:italic; color:var(--green)">No Issues Tracked</td></tr>
+      <tr><td class="site-col">HFD-3</td><td>Staples</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td>-</td><td style="text-align:center">-</td><td style="font-style:italic; color:var(--green)">No Issues Tracked</td></tr>
+      <tr><td class="site-col">HGR-1</td><td>Staples</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td>-</td><td style="text-align:center">-</td><td style="font-style:italic; color:var(--green)">No Issues Tracked</td></tr>
+      <tr><td class="site-col">HOU-10</td><td>Staples</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td>-</td><td style="text-align:center">-</td><td style="font-style:italic; color:var(--green)">No Issues Tracked</td></tr>
+      <tr><td class="site-col">HUD-1</td><td>Staples</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td>-</td><td style="text-align:center">-</td><td style="font-style:italic; color:var(--green)">No Issues Tracked</td></tr>
+      <tr><td class="site-col">INE-11</td><td>Staples</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td>-</td><td style="text-align:center">-</td><td>Pass Down &mdash; Adhoc LAX-11&rarr;INE-11 via LAV-5 driver (extra pallets)</td></tr>
+      <tr><td class="site-col">JAX-2</td><td>Staples</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td>-</td><td style="text-align:center">-</td><td style="font-style:italic; color:var(--green)">No Issues Tracked</td></tr>
+      <tr><td class="site-col">LAS-3</td><td>Staples</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td>-</td><td style="text-align:center">-</td><td style="font-style:italic; color:var(--green)">No Issues Tracked</td></tr>
+      <tr><td class="site-col">LAV-5</td><td>Staples</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td>-</td><td style="text-align:center">-</td><td>Pass Down &mdash; LAV-5 driver rerouted to pick up INE-11 pallets from LAX-11</td></tr>
+      <tr><td class="site-col">LAX-8</td><td>Warp</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td>-</td><td style="text-align:center">-</td><td style="font-style:italic; color:var(--green)">No Issues Tracked</td></tr>
+      <tr><td class="site-col">LAX-9</td><td>Staples</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td>-</td><td style="text-align:center">-</td><td style="font-style:italic; color:var(--green)">No Issues Tracked</td></tr>
+      <tr><td class="site-col">LIN-1</td><td>Staples</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td>-</td><td style="text-align:center">-</td><td>Pass Down &mdash; CHR carrier broke down; no load from NYC-1 tonight</td></tr>
+      <tr><td class="site-col">MSP-4</td><td>Staples</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td>-</td><td style="text-align:center">-</td><td style="font-style:italic; color:var(--green)">No Issues Tracked</td></tr>
+      <tr><td class="site-col">MSP-6</td><td>Owen Allen Solutions</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td>-</td><td style="text-align:center">-</td><td style="font-style:italic; color:var(--green)">No Issues Tracked</td></tr>
+      <tr><td class="site-col">NAS-2</td><td>Staples</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td>-</td><td style="text-align:center">-</td><td style="font-style:italic; color:var(--green)">No Issues Tracked</td></tr>
+      <tr><td class="site-col">NNJ-5</td><td>Dedicated</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td>-</td><td style="text-align:center">-</td><td style="font-style:italic; color:var(--green)">No Issues Tracked</td></tr>
+      <tr><td class="site-col">NNJ-6</td><td>Staples</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td>-</td><td style="text-align:center">-</td><td style="font-style:italic; color:var(--green)">No Issues Tracked</td></tr>
+      <tr><td class="site-col">OCO-1</td><td>Razr</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td>-</td><td style="text-align:center">-</td><td style="font-style:italic; color:var(--green)">No Issues Tracked</td></tr>
+      <tr><td class="site-col">ORL-3</td><td>Staples</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td>-</td><td style="text-align:center">-</td><td style="font-style:italic; color:var(--green)">No Issues Tracked</td></tr>
+      <tr><td class="site-col">PHL-7</td><td>Staples</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td>-</td><td style="text-align:center">-</td><td style="font-style:italic; color:var(--green)">No Issues Tracked</td></tr>
+      <tr><td class="site-col">PHL-8</td><td>Flexe</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td>-</td><td style="text-align:center">-</td><td style="font-style:italic; color:var(--green)">No Issues Tracked</td></tr>
+      <tr><td class="site-col">PHX-8</td><td>Staples</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td>-</td><td style="text-align:center">-</td><td style="font-style:italic; color:var(--green)">No Issues Tracked</td></tr>
+      <tr><td class="site-col">PIT-2</td><td>Staples</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td>-</td><td style="text-align:center">-</td><td style="font-style:italic; color:var(--green)">No Issues Tracked</td></tr>
+      <tr><td class="site-col">QNS-2</td><td>Staples</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td>-</td><td style="text-align:center">-</td><td style="font-style:italic; color:var(--green)">No Issues Tracked</td></tr>
+      <tr><td class="site-col">RAL-3</td><td>Staples</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td>-</td><td style="text-align:center">-</td><td style="font-style:italic; color:var(--green)">No Issues Tracked</td></tr>
+      <tr><td class="site-col">RIC-2</td><td>Staples</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td>-</td><td style="text-align:center">-</td><td style="font-style:italic; color:var(--green)">No Issues Tracked</td></tr>
+      <tr><td class="site-col">SAC-4</td><td>Staples</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td>-</td><td style="text-align:center">-</td><td style="font-style:italic; color:var(--green)">No Issues Tracked</td></tr>
+      <tr><td class="site-col">SAT-4</td><td>Staples</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td>-</td><td style="text-align:center">-</td><td style="font-style:italic; color:var(--green)">No Issues Tracked</td></tr>
+      <tr><td class="site-col">SND-3</td><td>Staples</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td>-</td><td style="text-align:center">-</td><td style="font-style:italic; color:var(--green)">No Issues Tracked</td></tr>
+      <tr><td class="site-col">TPA-4</td><td>Staples</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td>-</td><td style="text-align:center">-</td><td style="font-style:italic; color:var(--green)">No Issues Tracked</td></tr>
+      <tr><td class="site-col">VAB-4</td><td>Staples</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td class="pending-text" style="text-align:center">—</td><td>-</td><td style="text-align:center">-</td><td style="font-style:italic; color:var(--green)">No Issues Tracked</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="footer">
+  Parcel Core Ops Daily Site Review &nbsp;•&nbsp; Op Day 4/22/2026 (Tuesday) &nbsp;•&nbsp; Sources: Pending CSVs · Gmail EOS (6/9) · #ask-parcels (1 P1) · Google Sheets (7 Roll · 3 Pass Down)
+</div>
+
+</body>
+</html>
