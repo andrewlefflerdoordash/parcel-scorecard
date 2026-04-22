@@ -25,11 +25,11 @@
   .src.na { border-color: var(--border); color: var(--dim); opacity: .5; }
 
   .kpi-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: .75rem; padding: 1rem 2rem; background: var(--surface); border-bottom: 1px solid var(--border); }
-  .kpi { background: var(--card); border: 1px solid var(--border); border-radius: .6rem; padding: .75rem 1rem; }
+  .kpi { background: var(--card); border: 1px solid var(--border); border-radius: .6rem; padding: .75rem 1rem; display: flex; flex-direction: column; }
   .kpi .label { font-size: .62rem; text-transform: uppercase; letter-spacing: .05em; color: var(--dim); margin-bottom: .2rem; }
   .kpi .val { font-size: 1.3rem; font-weight: 800; }
-  .kpi .sub { font-size: .68rem; color: var(--dim); }
-  .kpi .trend { font-size: .65rem; margin-top: .2rem; font-weight: 600; }
+  .kpi .sub { font-size: .68rem; color: var(--dim); flex-grow: 1; }
+  .kpi .trend { font-size: .65rem; margin-top: auto; padding-top: .35rem; font-weight: 600; }
   .kpi .trend.up { color: var(--green); }
   .kpi .trend.down { color: var(--red); }
   .kpi .trend.neutral { color: var(--dim); }
