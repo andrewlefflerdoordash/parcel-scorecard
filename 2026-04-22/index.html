@@ -29,6 +29,10 @@
   .kpi .label { font-size: .62rem; text-transform: uppercase; letter-spacing: .05em; color: var(--dim); margin-bottom: .2rem; }
   .kpi .val { font-size: 1.3rem; font-weight: 800; }
   .kpi .sub { font-size: .68rem; color: var(--dim); }
+  .kpi .trend { font-size: .65rem; margin-top: .2rem; font-weight: 600; }
+  .kpi .trend.up { color: var(--green); }
+  .kpi .trend.down { color: var(--red); }
+  .kpi .trend.neutral { color: var(--dim); }
 
   .section { padding: 1rem 2rem .5rem; }
   .section-head { display: flex; align-items: center; gap: .6rem; margin-bottom: .5rem; }
@@ -88,15 +92,15 @@
 </div>
 
 <div class="kpi-row">
-  <div class="kpi"><div class="label">Network OTD %</div><div class="val pending-text">—</div><div class="sub">Pending CSV</div></div>
-  <div class="kpi"><div class="label">Network Hub CPT %</div><div class="val" style="color:var(--red)">84.0%</div><div class="sub">Controllable CPT (4/21)</div></div>
-  <div class="kpi"><div class="label">Spoke Forecast Var %</div><div class="val" style="color:var(--green)">-1.9%</div><div class="sub">85,018 forecast / 83,433 scanned</div></div>
-  <div class="kpi"><div class="label">Hub Forecast Var %</div><div class="val" style="color:var(--red)">+22.9%</div><div class="sub">91,698 forecast / 112,720 scanned</div></div>
-  <div class="kpi"><div class="label"># Spokes w/OTD Miss &gt; 0.35%</div><div class="val pending-text">—</div><div class="sub">Pending CSV</div></div>
-  <div class="kpi"><div class="label"># Clean Spokes w/OTD Miss &lt; 0.35%</div><div class="val pending-text">—</div><div class="sub">Pending CSV</div></div>
-  <div class="kpi"><div class="label"># of Hub EOS Reports Received</div><div class="val" style="color:var(--yellow)">6 / 9</div><div class="sub">ATL-13, DTX-1, EWR-2, FPK-1, LAX-11, LAX-12</div></div>
-  <div class="kpi"><div class="label"># of Sites w/Ask-Parcel Tickets</div><div class="val" style="color:var(--red)">4</div><div class="sub">11 tickets: 2 P0, 7 P1, 1 P2, 1 P3</div></div>
-  <div class="kpi"><div class="label"># Liveops Tracked Events</div><div class="val">10</div><div class="sub">7 Roll · 3 Pass Down</div></div>
+  <div class="kpi"><div class="label">Network OTD %</div><div class="val pending-text">—</div><div class="sub">Pending CSV</div><div class="trend neutral">4/20: 81.5%</div></div>
+  <div class="kpi"><div class="label">Network Hub CPT %</div><div class="val" style="color:var(--red)">84.0%</div><div class="sub">Controllable CPT (4/21)</div><div class="trend up">↑ +17.8pp vs 4/20 (66.2%)</div></div>
+  <div class="kpi"><div class="label">Spoke Forecast Var %</div><div class="val" style="color:var(--green)">-1.9%</div><div class="sub">85,018 forecast / 83,433 scanned</div><div class="trend up">↑ +7.5pp vs 4/20 (-9.4%)</div></div>
+  <div class="kpi"><div class="label">Hub Forecast Var %</div><div class="val" style="color:var(--red)">+22.9%</div><div class="sub">91,698 forecast / 112,720 scanned</div><div class="trend up">↑ improved vs 4/20 (+35.2%)</div></div>
+  <div class="kpi"><div class="label"># Spokes w/OTD Miss &gt; 0.35%</div><div class="val pending-text">—</div><div class="sub">Pending CSV</div><div class="trend neutral">4/20: 38</div></div>
+  <div class="kpi"><div class="label"># Clean Spokes w/OTD Miss &lt; 0.35%</div><div class="val pending-text">—</div><div class="sub">Pending CSV</div><div class="trend neutral">4/20: 13</div></div>
+  <div class="kpi"><div class="label"># of Hub EOS Reports Received</div><div class="val" style="color:var(--yellow)">6 / 9</div><div class="sub">ATL-13, DTX-1, EWR-2, FPK-1, LAX-11, LAX-12</div><div class="trend up">↑ +2 vs 4/20 (4/9)</div></div>
+  <div class="kpi"><div class="label"># of Sites w/Ask-Parcel Tickets</div><div class="val" style="color:var(--red)">4</div><div class="sub">11 tickets: 2 P0, 7 P1, 1 P2, 1 P3</div><div class="trend down">↑ +3 sites vs 4/20 (1)</div></div>
+  <div class="kpi"><div class="label"># Liveops Tracked Events</div><div class="val">10</div><div class="sub">7 Roll · 3 Pass Down</div><div class="trend up">↓ -5 vs 4/20 (15)</div></div>
 </div>
 <div class="section" style="margin-top:1.2rem; margin-bottom:0;">
   <div class="section-head">
