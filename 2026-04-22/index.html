@@ -95,7 +95,7 @@
   <div class="kpi"><div class="label"># Spokes w/OTD Miss &gt;5%</div><div class="val pending-text">—</div><div class="sub">Pending CSV</div></div>
   <div class="kpi"><div class="label"># Clean Spokes w/OTD Miss &lt;5%</div><div class="val pending-text">—</div><div class="sub">Pending CSV</div></div>
   <div class="kpi"><div class="label"># of Hub EOS Reports Received</div><div class="val" style="color:var(--yellow)">6 / 9</div><div class="sub">ATL-13, DTX-1, EWR-2, FPK-1, LAX-11, LAX-12</div></div>
-  <div class="kpi"><div class="label"># of Sites w/Ask-Parcel Tickets</div><div class="val">1</div><div class="sub">1 P1 (LAX-11)</div></div>
+  <div class="kpi"><div class="label"># of Sites w/Ask-Parcel Tickets</div><div class="val" style="color:var(--red)">4</div><div class="sub">11 tickets: 2 P0, 7 P1, 1 P2, 1 P3</div></div>
   <div class="kpi"><div class="label"># Liveops Tracked Events</div><div class="val">10</div><div class="sub">7 Roll · 3 Pass Down</div></div>
 </div>
 <div class="section" style="margin-top:1.2rem; margin-bottom:0;">
@@ -173,7 +173,7 @@
         <td style="text-align:center"><span style="color:var(--red)">-29.7%</span></td>
         <td style="text-align:center"><span style="color:var(--green)">100.0%</span></td>
         <td class="eos-ok">Received</td>
-        <td>All pallets/parcels shipped, no rollover.</td>
+        <td>All pallets/parcels shipped, no rollover.<br><strong>#ask-parcels:</strong> P1 PCENG-2106 &mdash; Inbound DLJ28PMWZTF5WZT rerouted to ORD-7 (manual DB edit)<br>P1 PCENG-2108 &mdash; Unable to scan pallets to DLRRWBAOHSHKQL4 ("Truck Departed" error)</td>
         <td style="text-align:center">-</td>
         <td>Roll &mdash; FPK-1&rarr;COL-5 (Warp, closed); FPK-1&rarr;EWR-2 (Bally, 57370)<br>Pass Down &mdash; Bally timestamp issues; EWR-2&harr;FPK-1 swaps; Late FM HM-IN-1&rarr;FPK-1 (traffic)</td>
       </tr>
@@ -197,7 +197,7 @@
         <td style="text-align:center"><span style="color:var(--red)">+50.8%</span></td>
         <td style="text-align:center"><span style="color:var(--red)">50.0%</span></td>
         <td class="eos-ok">Received</td>
-        <td>No rollover; all parcels processed and shipped.</td>
+        <td>No rollover; all parcels processed and shipped.<br><strong>#ask-parcels (3):</strong> BOL print error, wrong pallet on EBY-3 load, MACYS-AZ-1 scanning bug (fix deployed)</td>
         <td style="text-align:center">-</td>
         <td>Roll &mdash; SmartKargo&rarr;LAX-11 (DI); DTX-1&rarr;LAX-11 (Bally, 2 plts)<br>Pass Down &mdash; Scanning/loading issues led to late departures; adhoc LAX-11&rarr;INE-11 via LAV-5 driver</td>
       </tr>
@@ -233,7 +233,7 @@
         <td style="text-align:center">—</td>
         <td style="text-align:center">—</td>
         <td class="eos-miss">Missing</td>
-        <td><span class="pending-text">—</span></td>
+        <td><strong>#ask-parcels (3):</strong> Return bins missing (resolved); QR codes not showing zones (resolved); new user perms missing (mitigated)</td>
         <td style="text-align:center">-</td>
         <td>-</td>
       </tr>
@@ -292,7 +292,7 @@
       <tr><td class="site-col">LAS-3</td><td>Staples</td><td style="text-align:center">821</td><td style="text-align:center">648</td><td style="text-align:center"><span style="color:var(--red)">-21.1%</span></td><td class="pending-text" style="text-align:center">—</td><td>-</td><td style="text-align:center">-</td><td style="font-style:italic; color:var(--green)">No Issues Tracked</td></tr>
       <tr><td class="site-col">LAV-5</td><td>Staples</td><td style="text-align:center">254</td><td style="text-align:center">228</td><td style="text-align:center"><span style="color:var(--green)">-10.2%</span></td><td class="pending-text" style="text-align:center">—</td><td>-</td><td style="text-align:center">-</td><td>Pass Down &mdash; LAV-5 driver rerouted to pick up INE-11 pallets from LAX-11</td></tr>
       <tr><td class="site-col">LAX-8</td><td>Warp</td><td style="text-align:center">2,441</td><td style="text-align:center">2,044</td><td style="text-align:center"><span style="color:var(--red)">-16.3%</span></td><td class="pending-text" style="text-align:center">—</td><td>-</td><td style="text-align:center">-</td><td style="font-style:italic; color:var(--green)">No Issues Tracked</td></tr>
-      <tr><td class="site-col">LAX-9</td><td>Staples</td><td style="text-align:center">3,743</td><td style="text-align:center">4,195</td><td style="text-align:center"><span style="color:var(--green)">+12.1%</span></td><td class="pending-text" style="text-align:center">—</td><td>-</td><td style="text-align:center">-</td><td style="font-style:italic; color:var(--green)">No Issues Tracked</td></tr>
+      <tr><td class="site-col">LAX-9</td><td>Staples</td><td style="text-align:center">3,743</td><td style="text-align:center">4,195</td><td style="text-align:center"><span style="color:var(--green)">+12.1%</span></td><td class="pending-text" style="text-align:center">—</td><td>P1 PCENG-2109 &mdash; Packages w/ "Created" status in active batches, blocking dispatch</td><td style="text-align:center">-</td><td style="font-style:italic; color:var(--green)">No Issues Tracked</td></tr>
       <tr><td class="site-col">LIN-1</td><td>Staples</td><td style="text-align:center">2,692</td><td style="text-align:center">2,997</td><td style="text-align:center"><span style="color:var(--green)">+11.3%</span></td><td class="pending-text" style="text-align:center">—</td><td>-</td><td style="text-align:center">-</td><td>Pass Down &mdash; CHR carrier broke down; no load from NYC-1 tonight</td></tr>
       <tr><td class="site-col">MSP-4</td><td>Staples</td><td style="text-align:center">2,400</td><td style="text-align:center">1,799</td><td style="text-align:center"><span style="color:var(--red)">-25.0%</span></td><td class="pending-text" style="text-align:center">—</td><td>-</td><td style="text-align:center">-</td><td style="font-style:italic; color:var(--green)">No Issues Tracked</td></tr>
       <tr><td class="site-col">MSP-6</td><td>Owen Allen Solutions</td><td style="text-align:center">487</td><td style="text-align:center">478</td><td style="text-align:center"><span style="color:var(--green)">-1.8%</span></td><td class="pending-text" style="text-align:center">—</td><td>-</td><td style="text-align:center">-</td><td style="font-style:italic; color:var(--green)">No Issues Tracked</td></tr>
@@ -318,7 +318,7 @@
 </div>
 
 <div class="footer">
-  Parcel Core Ops Daily Site Review &nbsp;•&nbsp; Op Day 4/22/2026 (Tuesday) &nbsp;•&nbsp; Sources: Hub/Spoke Vol CSV · CPT CSV · OTD pending · Gmail EOS (6/9) · #ask-parcels (1 P1) · Google Sheets (7 Roll · 3 Pass Down)
+  Parcel Core Ops Daily Site Review &nbsp;•&nbsp; Op Day 4/22/2026 (Tuesday) &nbsp;•&nbsp; Sources: Hub/Spoke Vol CSV · CPT CSV · OTD pending · Gmail EOS (6/9) · #ask-parcels (11 tickets, 4 sites) · Google Sheets (7 Roll · 3 Pass Down)
 </div>
 
 </body>
