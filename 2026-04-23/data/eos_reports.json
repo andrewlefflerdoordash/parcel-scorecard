@@ -1,0 +1,18 @@
+{
+  "DTX-1": {
+    "status": "received",
+    "notes": "Sort down 20:45. Sorted 8,244. <strong style=\"color:var(--red)\">2 LAX pallets rolled</strong>."
+  },
+  "EWR-2": {
+    "status": "received",
+    "notes": "<strong style=\"color:var(--red)\">STORD 18 pallets rolled</strong> (1hr late arrival). FPK-1 truck mechanical issues (arrived 00:40). GCO 36min late. Built Bar 1hr late. Outbounds late &mdash; sort pushed to 10 PM."
+  },
+  "LAX-11": {
+    "status": "received",
+    "notes": "No parcels rolled. 12,907 received (100%). 13 trucks departed, 141 pallets, 12,188 parcels loaded."
+  },
+  "LAX-12": {
+    "status": "received",
+    "notes": "All parcels shipped, no items rolled."
+  }
+}

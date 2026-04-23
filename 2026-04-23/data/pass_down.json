@@ -1,0 +1,7 @@
+[
+  {"date": "04/22/26", "issues": "BuiltBar delivered late to DTX-1, missed sort; late inbound GCO-1→DTX-1", "resolved": "N", "next_shift": "", "action_items": "", "submitted_by": ""},
+  {"date": "04/22/26", "issues": "EWR-2→HBG-2 PU time incorrect (CHR investigating)", "resolved": "N", "next_shift": "", "action_items": "", "submitted_by": ""},
+  {"date": "04/22/26", "issues": "EWR-2 TONU'd 2nd DCA-5 & GRE-1", "resolved": "Y", "next_shift": "", "action_items": "", "submitted_by": ""},
+  {"date": "04/22/26", "issues": "EWR-2→BKN-9 load missing timestamps (CHR follow-up)", "resolved": "N", "next_shift": "", "action_items": "", "submitted_by": ""},
+  {"date": "04/22/26", "issues": "CHR missed pickup at NYC-1, mis-communicated delay; combined shipment rolling to 4/23 for LIN-1/BNX-1", "resolved": "N", "next_shift": "Load left LIN-1 late; CHR investigating", "action_items": "", "submitted_by": ""}
+]

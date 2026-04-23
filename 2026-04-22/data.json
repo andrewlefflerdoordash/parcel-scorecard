@@ -1,0 +1,18 @@
+{
+  "network_otd_pct": 90.65,
+  "network_cpt_pct": 84.0,
+  "hub_forecast_total": 91698,
+  "hub_scanned_total": 112720,
+  "spoke_forecast_total": 85018,
+  "spoke_scanned_total": 83433,
+  "spokes_above_threshold": 0,
+  "spokes_below_threshold": 51,
+  "total_reporting_spokes": 51,
+  "eos_received_count": 6,
+  "eos_total_count": 9,
+  "eos_hub_names": ["ATL-13", "DTX-1", "EWR-2", "FPK-1", "LAX-11", "LAX-12"],
+  "ticket_site_count": 4,
+  "ticket_total": 11,
+  "roll_count": 7,
+  "passdown_count": 3
+}

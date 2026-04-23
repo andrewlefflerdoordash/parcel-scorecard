@@ -1,0 +1,8 @@
+{
+  "ORD-7": [
+    "P1 &mdash; BOL printing failures (multiple shipments, manually resolved)",
+    "P1 &mdash; Pallet removal app loop (456 parcels, resolved)",
+    "P1 &mdash; Dock door ODR-7 clearing (resolved)",
+    "P1 &mdash; Move pallet to COL-5 truck (83 parcels, resolved)"
+  ]
+}

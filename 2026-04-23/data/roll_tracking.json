@@ -1,0 +1,8 @@
+[
+  {"status": "Resolved", "ship_date": "04/22/26", "delivery_date": "04/22/26", "carrier": "SmartKargo/BuiltBar", "lane_type": "Air", "origin": "SmartKargo", "destination": "DTX-1", "shipment": "", "pallets": "", "units": "12 bags", "root_cause": "held at shipper/airport delays", "details": ""},
+  {"status": "Resolved", "ship_date": "04/22/26", "delivery_date": "04/22/26", "carrier": "Bally", "lane_type": "OTR", "origin": "EWR-2", "destination": "FPK-1/ORD-7", "shipment": "", "pallets": "10", "units": "1597", "root_cause": "mechanical — truck regen", "details": ""},
+  {"status": "Resolved", "ship_date": "04/22/26", "delivery_date": "04/22/26", "carrier": "Bally", "lane_type": "OTR", "origin": "GCO-1", "destination": "ORD-7", "shipment": "", "pallets": "18", "units": "1907", "root_cause": "tire issue en route", "details": ""},
+  {"status": "Resolved", "ship_date": "04/22/26", "delivery_date": "04/22/26", "carrier": "Bally", "lane_type": "OTR", "origin": "LAX-11", "destination": "EBY-3", "shipment": "", "pallets": "", "units": "", "root_cause": "truck capacity, couldn't source adhoc", "details": ""},
+  {"status": "Resolved", "ship_date": "04/22/26", "delivery_date": "04/23/26", "carrier": "SmartKargo", "lane_type": "Air", "origin": "SmartKargo", "destination": "LAX-11", "shipment": "", "pallets": "9", "units": "20 bags", "root_cause": "flight reschedule, delivering 0800-1000", "details": ""},
+  {"status": "Resolved", "ship_date": "04/22/26", "delivery_date": "04/22/26", "carrier": "", "lane_type": "OTR", "origin": "NYC-1", "destination": "LIN-1/BNX-1", "shipment": "", "pallets": "3", "units": "324", "root_cause": "carrier truck broke down, combining with next day load", "details": ""}
+]
