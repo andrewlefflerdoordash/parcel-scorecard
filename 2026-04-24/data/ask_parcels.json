@@ -1,0 +1,7 @@
+{
+  "GCO-1": ["P1 — Accidentally closed outbound truck; scan error when adding pallets"],
+  "ORD-7": ["P1 — Chicago 17 trailer #2 could not be loaded", "P1 — Inbound truck for Cold Chain not visible in system", "P1 — Unable to remove pallet from outbound truck (456 parcels)", "P1 — Pallet marking needed for ORD-7 to COL-5 truck", "P3 — BOL printing endpoint returning null after outbound complete", "P1 — Return lane setup for Ship Pros and Tusk Goodbye Goodyear"],
+  "MSP-4": ["P0 — Driver app issues; parcels showing out for delivery but runner stuck on arrival directions (57 parcels)"],
+  "CLT-3": ["P3 — Hold status issue for parcel"],
+  "BKN-9": ["P3 — Batch split; 3 parcels not assigned to runner, stuck in Scanned by Runner status (60 parcels)"]
+}
