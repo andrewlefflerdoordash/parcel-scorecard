@@ -2,5 +2,8 @@
   "LAX-12": {"status": "received", "notes": "All parcels shipped, no items rolled."},
   "LAX-11": {"status": "received", "notes": "No parcels rolled; all processed and shipped. Late due to dock door issue upon checking in and scanning."},
   "DTX-1": {"status": "received", "notes": "Sort down at 10:30 PM. Expected 6,605 / Sorted 9,437. Floor cleared."},
-  "EWR-2": {"status": "received", "notes": "Rolled parcels for Stord, ORD-7, Built Bar. PHL-8 XDock was late."}
+  "EWR-2": {"status": "received", "notes": "Rolled parcels for Stord, ORD-7, Built Bar. PHL-8 was late."},
+  "ATL-13": {"status": "pending", "notes": "EOS not received for 4/23."},
+  "GCO-1": {"status": "pending", "notes": "EOS not received for 4/23."},
+  "ORD-7": {"status": "pending", "notes": "EOS not received for 4/23."}
 }

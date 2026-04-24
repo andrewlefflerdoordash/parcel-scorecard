@@ -5,7 +5,7 @@
   "op_date_day": "Friday",
   "generated_date": "Apr 24, 2026",
   "hub_count": 11,
-  "spoke_count": 51,
+  "spoke_count": 56,
   "sources": [
     {
       "label": "\u2713 OTD (Sigma)",
@@ -32,7 +32,7 @@
       "status": "active"
     }
   ],
-  "ops_summary": "Network OTD was <strong>94.64%</strong> (improved from 93.06% on prior day), with 0 of 56 reporting spokes above the 0.35% miss attribution threshold.\n\n    Network Hub CPT was <strong>78.6%</strong> (down from 82.7%), driven by LAX-11 (41.2%), ORD-7 (58.8%), DTX-1 (62.5%).\n\n    <strong>10 #ask-parcels tickets</strong> were filed across 5 site(s) (BKN-9, CLT-3, GCO-1, MSP-4, ORD-7).\n\n    Notable EOS highlights from: EWR-2, LAX-11, LAX-12.\n\n    Hub forecast variance was <strong>-41.0%</strong> (117,739 forecast vs 69,500 scanned).",
+  "ops_summary": "Network OTD was <strong>94.64%</strong> (improved from 93.06% on prior day), with 0 of 56 reporting spokes above the 0.35% miss attribution threshold.\n\n    Network Hub CPT was <strong>78.6%</strong> (down from 82.7%), driven by LAX-11 (41.2%), ORD-7 (58.8%), DTX-1 (62.5%).\n\n    <strong>10 #ask-parcels tickets</strong> were filed across 5 site(s) (BKN-9, CLT-3, GCO-1, MSP-4, ORD-7).\n\n    Notable EOS highlights from: EWR-2, LAX-11, LAX-12.\n\n    Hub forecast variance was <strong>-22.3%</strong> (117,739 forecast vs 91,502 scanned).",
   "hubs": [
     {
       "name": "ATL-13",
@@ -44,7 +44,7 @@
       "cpt_pct": "100.0%",
       "cpt_color": "var(--green)",
       "eos_status": "miss",
-      "eos_notes": "<span class=\"pending-text\">&mdash;</span>",
+      "eos_notes": "EOS not received for 4/23.",
       "tickets": "-",
       "liveops": "-",
       "escalation": false,
@@ -92,7 +92,7 @@
       "cpt_pct": "96.0%",
       "cpt_color": "var(--green)",
       "eos_status": "ok",
-      "eos_notes": "Rolled parcels for Stord, ORD-7, Built Bar. PHL-8 XDock was late.",
+      "eos_notes": "Rolled parcels for Stord, ORD-7, Built Bar. PHL-8 was late.",
       "tickets": "-",
       "liveops": "-",
       "escalation": false,
@@ -108,7 +108,7 @@
       "cpt_pct": "91.7%",
       "cpt_color": "var(--yellow)",
       "eos_status": "miss",
-      "eos_notes": "<span class=\"pending-text\">&mdash;</span>",
+      "eos_notes": "EOS not received for 4/23.",
       "tickets": "P1 \u2014 Accidentally closed outbound truck; scan error when adding pallets",
       "liveops": "-",
       "escalation": false,
@@ -198,13 +198,13 @@
       "name": "ORD-7",
       "sort_partner": "Warp",
       "forecast_vol": "24,593",
-      "scanned_vol": "\u2014",
-      "var_pct": "\u2014",
-      "var_color": "var(--dim)",
+      "scanned_vol": "22,002",
+      "var_pct": "-10.5%",
+      "var_color": "var(--yellow)",
       "cpt_pct": "58.8%",
       "cpt_color": "var(--red)",
       "eos_status": "miss",
-      "eos_notes": "<span class=\"pending-text\">&mdash;</span>",
+      "eos_notes": "EOS not received for 4/23.",
       "tickets": "P1 \u2014 Chicago 17 trailer #2 could not be loaded<br>P1 \u2014 Inbound truck for Cold Chain not visible in system<br>P1 \u2014 Unable to remove pallet from outbound truck (456 parcels)<br>P1 \u2014 Pallet marking needed for ORD-7 to COL-5 truck<br>P3 \u2014 BOL printing endpoint returning null after outbound complete<br>P1 \u2014 Return lane setup for Ship Pros and Tusk Goodbye Goodyear",
       "liveops": "-",
       "escalation": false,
@@ -330,6 +330,19 @@
       "liveops": "<span style=\"font-style:italic; color:var(--green)\">No Issues Tracked</span>"
     },
     {
+      "name": "CHI-19",
+      "sort_partner": "Staples",
+      "forecast_vol": "\u2014",
+      "scanned_vol": "\u2014",
+      "var_pct": "\u2014",
+      "var_color": "var(--dim)",
+      "otd_miss_pct": "0%",
+      "otd_miss_color": "var(--green)",
+      "tickets": "-",
+      "tdd_callouts": "-",
+      "liveops": "<span style=\"font-style:italic; color:var(--green)\">No Issues Tracked</span>"
+    },
+    {
       "name": "CIN-5",
       "sort_partner": "Staples",
       "forecast_vol": "1,709",
@@ -447,6 +460,19 @@
       "liveops": "<span style=\"font-style:italic; color:var(--green)\">No Issues Tracked</span>"
     },
     {
+      "name": "DCA-6",
+      "sort_partner": "Staples",
+      "forecast_vol": "\u2014",
+      "scanned_vol": "\u2014",
+      "var_pct": "\u2014",
+      "var_color": "var(--dim)",
+      "otd_miss_pct": "0%",
+      "otd_miss_color": "var(--green)",
+      "tickets": "-",
+      "tdd_callouts": "-",
+      "liveops": "<span style=\"font-style:italic; color:var(--green)\">No Issues Tracked</span>"
+    },
+    {
       "name": "DET-13",
       "sort_partner": "Staples",
       "forecast_vol": "3,027",
@@ -467,6 +493,19 @@
       "var_pct": "-5.3%",
       "var_color": "var(--green)",
       "otd_miss_pct": "0.0026%",
+      "otd_miss_color": "var(--green)",
+      "tickets": "-",
+      "tdd_callouts": "-",
+      "liveops": "<span style=\"font-style:italic; color:var(--green)\">No Issues Tracked</span>"
+    },
+    {
+      "name": "EBY-7",
+      "sort_partner": "Dedicated",
+      "forecast_vol": "\u2014",
+      "scanned_vol": "\u2014",
+      "var_pct": "\u2014",
+      "var_color": "var(--dim)",
+      "otd_miss_pct": "0%",
       "otd_miss_color": "var(--green)",
       "tickets": "-",
       "tdd_callouts": "-",
@@ -638,6 +677,19 @@
       "otd_miss_pct": "0.0437%",
       "otd_miss_color": "var(--green)",
       "tickets": "P0 \u2014 Driver app issues; parcels showing out for delivery but runner stuck on arrival directions (57 parcels)",
+      "tdd_callouts": "-",
+      "liveops": "<span style=\"font-style:italic; color:var(--green)\">No Issues Tracked</span>"
+    },
+    {
+      "name": "MSP-5",
+      "sort_partner": "Staples",
+      "forecast_vol": "\u2014",
+      "scanned_vol": "\u2014",
+      "var_pct": "\u2014",
+      "var_color": "var(--dim)",
+      "otd_miss_pct": "0%",
+      "otd_miss_color": "var(--green)",
+      "tickets": "-",
       "tdd_callouts": "-",
       "liveops": "<span style=\"font-style:italic; color:var(--green)\">No Issues Tracked</span>"
     },
@@ -824,6 +876,19 @@
       "liveops": "<span style=\"font-style:italic; color:var(--green)\">No Issues Tracked</span>"
     },
     {
+      "name": "SAC-5",
+      "sort_partner": "Staples",
+      "forecast_vol": "\u2014",
+      "scanned_vol": "\u2014",
+      "var_pct": "\u2014",
+      "var_color": "var(--dim)",
+      "otd_miss_pct": "0%",
+      "otd_miss_color": "var(--green)",
+      "tickets": "-",
+      "tdd_callouts": "-",
+      "liveops": "<span style=\"font-style:italic; color:var(--green)\">No Issues Tracked</span>"
+    },
+    {
       "name": "SAT-4",
       "sort_partner": "Staples",
       "forecast_vol": "644",
@@ -879,12 +944,12 @@
   "network_otd_pct": 94.64,
   "network_cpt_pct": 78.6,
   "hub_forecast_total": 117739,
-  "hub_scanned_total": 69500,
+  "hub_scanned_total": 91502,
   "spoke_forecast_total": 155290,
-  "spoke_scanned_total": 342262,
+  "spoke_scanned_total": 320260,
   "spokes_above_threshold": 0,
-  "spokes_below_threshold": 51,
-  "total_reporting_spokes": 51,
+  "spokes_below_threshold": 56,
+  "total_reporting_spokes": 56,
   "eos_received_count": 4,
   "eos_total_count": 11,
   "eos_hub_names": [
@@ -926,35 +991,35 @@
     },
     {
       "label": "Spoke Forecast Var %",
-      "value": "+120.4%",
+      "value": "+106.2%",
       "color": "var(--red)",
-      "sub": "155,290 forecast / 342,262 scanned",
+      "sub": "155,290 forecast / 320,260 scanned",
       "trend_text": "\u2193 Worsened v. prior day (1.864311087063916)",
       "trend_class": "down"
     },
     {
       "label": "Hub Forecast Var %",
-      "value": "-41.0%",
-      "color": "var(--red)",
-      "sub": "117,739 forecast / 69,500 scanned",
-      "trend_text": "\u2193 Worsened v. prior day (25.775741680574953)",
-      "trend_class": "down"
+      "value": "-22.3%",
+      "color": "var(--yellow)",
+      "sub": "117,739 forecast / 91,502 scanned",
+      "trend_text": "\u2191 Improved v. prior day (25.775741680574953)",
+      "trend_class": "up"
     },
     {
       "label": "# Spokes w/OTD Miss > 0.35%",
       "value": "0",
       "color": "var(--green)",
-      "sub": "of 51 spokes (4/23)",
+      "sub": "of 56 spokes (4/23)",
       "trend_text": "Same as prior day (0)",
       "trend_class": "neutral"
     },
     {
       "label": "# Clean Spokes w/OTD Miss < 0.35%",
-      "value": "51",
+      "value": "56",
       "color": "var(--green)",
       "sub": "\u22640.35% OTD miss attribution (4/23)",
-      "trend_text": "Same as prior day (51)",
-      "trend_class": "neutral"
+      "trend_text": "\u2191 Improved v. prior day (51)",
+      "trend_class": "up"
     },
     {
       "label": "# of Hub EOS Reports Received",
