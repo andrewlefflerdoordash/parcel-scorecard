@@ -1,1 +1,6 @@
-[]
+[
+  {"site": "ATL-13", "origin": "Builtbar", "carrier": "SmartKargo", "type": "DI", "pallets": "-", "units": "554 (total)", "root_cause": "Manifest Issue", "details": "SmartKargo operational challenges at SLC airport; impacted ATL-13, EBY-3, DTX-1. Shipments delivering next day."},
+  {"site": "EWR-2", "origin": "STORD", "carrier": "Sort", "type": "FM", "pallets": "11", "units": "", "root_cause": "Driver Error", "details": "Rollover due to late arrival."},
+  {"site": "EWR-2", "origin": "ORD-7", "carrier": "N/A", "type": "MM", "pallets": "24", "units": "", "root_cause": "Driver Error", "details": "Rollover due to late arrival."},
+  {"site": "EWR-2", "origin": "BUILTBAR", "carrier": "SmartKargo", "type": "FM", "pallets": "-", "units": "44 bags", "root_cause": "Driver Error", "details": "Rollover due to late arrival."}
+]

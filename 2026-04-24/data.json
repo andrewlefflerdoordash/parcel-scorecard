@@ -25,14 +25,14 @@
     },
     {
       "label": "\u2713 Google Sheets (Roll/Pass Down)",
-      "status": "na"
+      "status": "active"
     },
     {
       "label": "\u2713 Sigma Exports",
       "status": "active"
     }
   ],
-  "ops_summary": "Network OTD was <strong>94.64%</strong> (improved from 93.06% on prior day), with 0 of 56 reporting spokes above the 0.35% miss attribution threshold.\n\n    Network Hub CPT was <strong>78.6%</strong> (down from 82.7%), driven by LAX-11 (41.2%), ORD-7 (58.8%), DTX-1 (62.5%).\n\n    <strong>10 #ask-parcels tickets</strong> were filed across 5 site(s) (BKN-9, CLT-3, GCO-1, MSP-4, ORD-7).\n\n    Notable EOS highlights from: EWR-2, LAX-11, LAX-12.\n\n    Hub forecast variance was <strong>-22.3%</strong> (117,739 forecast vs 91,502 scanned).",
+  "ops_summary": "Network OTD was <strong>94.64%</strong> (improved from 93.06% on prior day), with 0 of 56 reporting spokes above the 0.35% miss attribution threshold.\n\n    Network Hub CPT was <strong>78.6%</strong> (down from 82.7%), driven by LAX-11 (41.2%), ORD-7 (58.8%), DTX-1 (62.5%).\n\n    <strong>10 #ask-parcels tickets</strong> were filed across 5 site(s) (BKN-9, CLT-3, GCO-1, MSP-4, ORD-7).\n\n    Notable EOS highlights from: EWR-2, LAX-11, LAX-12.\n\n    Hub forecast variance was <strong>-22.3%</strong> (117,739 forecast vs 91,502 scanned).\n\n    LiveOps tracked 4 roll event(s) and 5 pass-down note(s).",
   "hubs": [
     {
       "name": "ATL-13",
@@ -206,7 +206,7 @@
       "eos_status": "miss",
       "eos_notes": "EOS not received for 4/23.",
       "tickets": "P1 \u2014 Chicago 17 trailer #2 could not be loaded<br>P1 \u2014 Inbound truck for Cold Chain not visible in system<br>P1 \u2014 Unable to remove pallet from outbound truck (456 parcels)<br>P1 \u2014 Pallet marking needed for ORD-7 to COL-5 truck<br>P3 \u2014 BOL printing endpoint returning null after outbound complete<br>P1 \u2014 Return lane setup for Ship Pros and Tusk Goodbye Goodyear",
-      "liveops": "-",
+      "liveops": "Roll &mdash; ORD-7&rarr; (N/A, 24 plts, Driver Error &mdash; Rollover due to late arrival.)",
       "escalation": false,
       "tags": []
     }
@@ -961,8 +961,8 @@
   "ticket_site_count": 5,
   "ticket_total": 10,
   "ticket_breakdown": "10 P1",
-  "roll_count": 0,
-  "passdown_count": 0,
+  "roll_count": 4,
+  "passdown_count": 5,
   "prior_network_otd_pct": 93.06,
   "prior_network_cpt_pct": 82.7,
   "prior_spokes_above_threshold": 0,
@@ -1039,12 +1039,12 @@
     },
     {
       "label": "# Liveops Tracked Events",
-      "value": "\u2014",
-      "color": "var(--dim)",
-      "sub": "Google Sheets auth expired",
-      "trend_text": "Data pending (Sheets auth required)",
-      "trend_class": "neutral"
+      "value": "9",
+      "color": "",
+      "sub": "4 Roll \u00b7 5 Pass Down",
+      "trend_text": "\u2191 Improved v. prior day (11)",
+      "trend_class": "up"
     }
   ],
-  "footer_text": "Parcel Core Ops Daily Site Review &nbsp;\u2022&nbsp; Op Day 4/24/2026 (Friday) &nbsp;\u2022&nbsp; Sources: Sigma Exports (Hub Vol, CPT, OTD, Spoke Vol) \u00b7 Gmail EOS (4/11) \u00b7 #ask-parcels (10 tickets, 5 sites) \u00b7 Google Sheets (0 Roll \u00b7 0 Pass Down) \u00b7 TDD DashLink (0 callouts: none)"
+  "footer_text": "Parcel Core Ops Daily Site Review &nbsp;\u2022&nbsp; Op Day 4/24/2026 (Friday) &nbsp;\u2022&nbsp; Sources: Sigma Exports (Hub Vol, CPT, OTD, Spoke Vol) \u00b7 Gmail EOS (4/11) \u00b7 #ask-parcels (10 tickets, 5 sites) \u00b7 Google Sheets (4 Roll \u00b7 5 Pass Down) \u00b7 TDD DashLink (0 callouts: none)"
 }
