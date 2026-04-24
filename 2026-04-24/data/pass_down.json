@@ -1,7 +1,7 @@
 [
-  {"site": "EWR-2", "shift_date": "04/23/26", "submitted_by": "Donna Flores", "details": "ORD-7 did not send an EOS report. H&M Plainfield canceled 1 of 4 loads. Late Inbound ORD-7 → EWR-2 (57410 / DLNDP7T5FKXBX93) delayed due to light issue, ETA 20:00."},
-  {"site": "ORD-7", "shift_date": "04/23/26", "submitted_by": "Donna Flores", "details": "ORD-7 did not send an EOS report for last night."},
-  {"site": "EWR-2", "shift_date": "04/23/26", "submitted_by": "Abby Cryderman", "details": "Bally timestamp issues persist (5-7 hour discrepancies). HM-IN-1 → ORD-7 load waiting on timestamps from CHR."},
-  {"site": "EWR-2", "shift_date": "04/23/2026", "submitted_by": "Emily Phan", "details": "Rollover at EWR-2: STORD, ORD-7, BUILTBAR. EWR-2 → ATL-13 driver stopped for broken windshield, potential delay."},
-  {"site": "LAX-11", "shift_date": "04/23/26", "submitted_by": "Gabriel Wright", "details": "LAX-11 escalating issues through multiple channels (Intercom, Email, Phone Call) simultaneously and becoming non-responsive while trying to work with ENG."}
+  {"issues": "ORD-7 did not send an EOS report. H&M Plainfield canceled 1 of 4 loads. Late Inbound ORD-7 to EWR-2 (57410) delayed due to light issue, ETA 20:00.", "next_shift": "EWR-2 sort ends at 20:30, will advise status.", "submitted_by": "Donna Flores"},
+  {"issues": "Bally timestamp issues persist (5-7 hour discrepancies). HM-IN-1 to ORD-7 load waiting on timestamps from CHR.", "next_shift": "", "submitted_by": "Abby Cryderman"},
+  {"issues": "Rollover at EWR-2: STORD, ORD-7, BUILTBAR. EWR-2 to ATL-13 driver stopped for broken windshield, potential delay.", "next_shift": "Monitor EWR-2 to ATL-13 (1730994342) for windshield delay.", "submitted_by": "Emily Phan"},
+  {"issues": "LAX-11 escalating issues through multiple channels (Intercom, Email, Phone Call) simultaneously and becoming non-responsive while working with ENG.", "next_shift": "", "submitted_by": "Gabriel Wright"},
+  {"issues": "CHR has not responded to update TMS exceptions for EWR-2.", "next_shift": "Follow up with CHR on EWR-2 exception updates.", "submitted_by": "meghan.moffa.cw"}
 ]
