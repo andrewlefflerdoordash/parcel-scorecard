@@ -28,6 +28,16 @@ def update_landing_page(scorecard_dir: Path, op_date: date, hub_count: int, spok
     # Remove existing 'Latest' badge from any card
     html = html.replace(' <span class="badge-latest">Latest</span>', '')
     
+    # Remove any existing cards for this same date to prevent duplicates
+    pattern = re.compile(
+        r'\s*<a class="card" href="' + re.escape(date_folder) + r'/">\s*'
+        r'<div>\s*<div class="card-date">.*?</div>\s*'
+        r'<div class="card-day">.*?</div>\s*</div>\s*'
+        r'<div class="card-arrow">.*?</div>\s*</a>',
+        re.DOTALL
+    )
+    html = pattern.sub('', html)
+    
     # Build the new card HTML
     new_card = f'''  <a class="card" href="{date_folder}/">
     <div>
