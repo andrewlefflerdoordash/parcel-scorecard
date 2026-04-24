@@ -978,7 +978,7 @@
       "value": "94.64%",
       "color": "var(--yellow)",
       "sub": "OKR Daily OTD Misses (4/23)",
-      "trend_text": "\u2191 Improved v. prior day (93.06)",
+      "trend_text": "\u2191 Improved v. prior day (93.1)",
       "trend_class": "up"
     },
     {
@@ -994,7 +994,7 @@
       "value": "+3.7%",
       "color": "var(--green)",
       "sub": "77,898 forecast / 80,805 scanned",
-      "trend_text": "\u2193 Worsened v. prior day (1.864311087063916)",
+      "trend_text": "\u2193 Worsened v. prior day (1.9)",
       "trend_class": "down"
     },
     {
@@ -1002,7 +1002,7 @@
       "value": "-22.3%",
       "color": "var(--yellow)",
       "sub": "117,739 forecast / 91,502 scanned",
-      "trend_text": "\u2191 Improved v. prior day (25.775741680574953)",
+      "trend_text": "\u2191 Improved v. prior day (25.8)",
       "trend_class": "up"
     },
     {
@@ -1041,9 +1041,9 @@
       "label": "# Liveops Tracked Events",
       "value": "\u2014",
       "color": "var(--dim)",
-      "sub": "Pending",
-      "trend_text": "\u2191 Improved v. prior day (11)",
-      "trend_class": "up"
+      "sub": "Google Sheets auth expired",
+      "trend_text": "Data pending (Sheets auth required)",
+      "trend_class": "neutral"
     }
   ],
   "footer_text": "Parcel Core Ops Daily Site Review &nbsp;\u2022&nbsp; Op Day 4/24/2026 (Friday) &nbsp;\u2022&nbsp; Sources: Sigma Exports (Hub Vol, CPT, OTD, Spoke Vol) \u00b7 Gmail EOS (4/11) \u00b7 #ask-parcels (10 tickets, 5 sites) \u00b7 Google Sheets (0 Roll \u00b7 0 Pass Down) \u00b7 TDD DashLink (0 callouts: none)"
