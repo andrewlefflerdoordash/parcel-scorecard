@@ -946,7 +946,7 @@
   "hub_forecast_total": 117739,
   "hub_scanned_total": 91502,
   "spoke_forecast_total": 155290,
-  "spoke_scanned_total": 320260,
+  "spoke_scanned_total": 250795,
   "spokes_above_threshold": 0,
   "spokes_below_threshold": 56,
   "total_reporting_spokes": 56,
@@ -991,9 +991,9 @@
     },
     {
       "label": "Spoke Forecast Var %",
-      "value": "+106.2%",
+      "value": "+61.5%",
       "color": "var(--red)",
-      "sub": "155,290 forecast / 320,260 scanned",
+      "sub": "155,290 forecast / 250,795 scanned",
       "trend_text": "\u2193 Worsened v. prior day (1.864311087063916)",
       "trend_class": "down"
     },
