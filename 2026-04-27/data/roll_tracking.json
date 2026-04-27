@@ -1,0 +1,4 @@
+[
+  {"origin": "TikTok-IL", "destination": "ORD-7", "carrier": "CHR/OMNI", "type": "FM", "pallets": "12", "units": "", "root_cause": "Carrier Dispatch Error", "details": "Omni sub-carrier mistakenly dropped at ORD-6 instead of ORD-7. Discovered when GPS showed delivered but ORD-7 didn't have freight. DashLink senior leadership to meet with affected parties for recovery path."},
+  {"origin": "STORD", "destination": "EWR-2", "carrier": "Sort", "type": "FM", "pallets": "6", "units": "", "root_cause": "Hub Sort/Processing", "details": "STORD rolled due to arriving late."}
+]

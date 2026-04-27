@@ -1,0 +1,13 @@
+{
+  "LAX-12": {"status": "received", "summary": "All parcels shipped, no rolls. Source: Warp (Grace Nguyen) 4/27 09:01 UTC."},
+  "ORD-7": {"status": "received", "summary": "All parcels shipped, no rolls (combined report w/ LAX-12). Source: Warp 4/27 09:01 UTC."},
+  "LAX-11": {"status": "received", "summary": "All parcels processed and shipped, no rolls. 10 damage boxes (tape torn) resealed and shipped. Source: QX Logistix (Gricel Maza)."},
+  "DTX-1": {"status": "received", "summary": "Sort down 23:30, expected 7,800 / sorted 7,800, floor cleared. Note: late departures flagged on HOU-10, ATX-5/SAT-4, ORD-7 lanes pending root cause from SpeedX."},
+  "EWR-2": {"status": "received", "summary": "Sort: 6 STORD pallets rolled due to driver arriving late. Dispatch: NNJ-5 arrived late and dispatched late; PHL-8 arrived late and dispatched late."},
+  "ATL-13": {"status": "pending", "summary": "EOS not received for 4/26."},
+  "CRN-1": {"status": "pending", "summary": "EOS not received for 4/26."},
+  "GCO-1": {"status": "pending", "summary": "EOS not received for 4/26."},
+  "GRE-1": {"status": "pending", "summary": "EOS not received for 4/26."},
+  "MCO-1": {"status": "pending", "summary": "EOS not received for 4/26."},
+  "NYC-1": {"status": "pending", "summary": "EOS not received for 4/26."}
+}

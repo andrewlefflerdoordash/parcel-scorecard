@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parcel Ops Daily Scorecard — 4/26</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23FF3008'/%3E%3Cpath d='M8 12l8-5 8 5v10l-8 5-8-5z' fill='none' stroke='white' stroke-width='2' stroke-linejoin='round'/%3E%3Cpath d='M16 17v10M8 12l8 5 8-5' fill='none' stroke='white' stroke-width='2' stroke-linejoin='round'/%3E%3C/svg%3E">
+<style>
+  :root {
+    --bg: #0f1117; --surface: #161923; --card: #1c2030; --border: #272d42;
+    --text: #e2e4ef; --dim: #7b82a0; --accent: #6c8cff;
+    --green: #34d399; --yellow: #fbbf24; --red: #f87171; --orange: #fb923c;
+    --purple: #a78bfa; --blue: #60a5fa; --teal: #2dd4bf;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, sans-serif; background: var(--bg); color: var(--text); }
+
+  .topbar { background: var(--surface); border-bottom: 1px solid var(--border); padding: 1.25rem 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: .75rem; }
+  .topbar h1 { font-size: 1.25rem; font-weight: 700; letter-spacing: -.01em; }
+  .topbar .meta { font-size: .78rem; color: var(--dim); }
+  .sources { display: flex; gap: .4rem; flex-wrap: wrap; }
+  .src { font-size: .62rem; padding: .15rem .5rem; border-radius: 999px; border: 1px solid var(--border); color: var(--dim); text-transform: uppercase; letter-spacing: .04em; }
+  .src.active { border-color: var(--green); color: var(--green); }
+  .src.warn { border-color: var(--yellow); color: var(--yellow); }
+  .src.na { border-color: var(--border); color: var(--dim); opacity: .5; }
+
+  .kpi-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: .75rem; padding: 1rem 2rem; background: var(--surface); border-bottom: 1px solid var(--border); }
+  .kpi { background: var(--card); border: 1px solid var(--border); border-radius: .6rem; padding: .75rem 1rem; display: flex; flex-direction: column; }
+  .kpi .label { font-size: .62rem; text-transform: uppercase; letter-spacing: .05em; color: var(--dim); margin-bottom: .2rem; }
+  .kpi .val { font-size: 1.3rem; font-weight: 800; }
+  .kpi .sub { font-size: .68rem; color: var(--dim); flex-grow: 1; }
+  .kpi .trend { font-size: .65rem; margin-top: auto; padding-top: .35rem; font-weight: 600; }
+  .kpi .trend.up { color: var(--green); }
+  .kpi .trend.down { color: var(--red); }
+  .kpi .trend.neutral { color: var(--dim); }
+
+  .section { padding: 1rem 2rem .5rem; }
+  .section-head { display: flex; align-items: center; gap: .6rem; margin-bottom: .5rem; }
+  .section-head h2 { font-size: 1rem; font-weight: 700; }
+  .badge { font-size: .58rem; padding: .12rem .45rem; border-radius: 999px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; }
+  .badge-hub { background: rgba(108,140,255,.15); color: var(--accent); }
+  .badge-spoke { background: rgba(167,139,250,.15); color: var(--purple); }
+
+  table { width: 100%; border-collapse: collapse; font-size: .78rem; }
+  thead th { text-align: left; padding: .5rem .6rem; font-size: .62rem; text-transform: uppercase; letter-spacing: .05em; color: var(--dim); border-bottom: 2px solid var(--border); position: sticky; top: 0; background: var(--bg); z-index: 2; }
+  tbody td { padding: .55rem .6rem; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.45; }
+  tbody tr:hover { background: rgba(108,140,255,.04); }
+  .site-col { font-weight: 700; font-size: .85rem; white-space: nowrap; min-width: 65px; }
+
+  .tag { display: inline-block; font-size: .6rem; font-weight: 700; padding: .1rem .35rem; border-radius: .25rem; margin-right: .25rem; text-transform: uppercase; letter-spacing: .03em; vertical-align: middle; }
+  .tag-p1 { background: rgba(248,113,113,.15); color: var(--red); }
+  .tag-tdd { background: rgba(167,139,250,.15); color: var(--purple); }
+  .tag-eos { background: rgba(52,211,153,.15); color: var(--green); }
+  .tag-new { background: rgba(52,211,153,.15); color: var(--green); }
+  .tag-alert { background: rgba(248,113,113,.2); color: var(--red); }
+
+  .eos-ok { color: var(--green); }
+  .eos-miss { color: var(--red); font-weight: 600; }
+  .clean { color: var(--dim); font-style: italic; }
+  .pending-text { color: var(--yellow); font-style: italic; }
+
+  .footer { text-align: center; padding: 1.5rem; color: var(--dim); font-size: .7rem; border-top: 1px solid var(--border); margin-top: 1rem; }
+
+  @media (max-width: 900px) { .topbar, .kpi-row, .section { padding-left: .75rem; padding-right: .75rem; } }
+  @media print {
+    body { background: #fff; color: #1a1a1a; }
+    .topbar, .kpi-row, .section { background: #fff; }
+    table, th, td { border-color: #ddd; }
+    .kpi { background: #f5f5f5; border-color: #ddd; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div style="display:flex; align-items:center; gap:.75rem;">
+    <img src="https://static.cdnlogo.com/logos/d/89/doordash.svg" alt="DoorDash" style="height:14px; filter:none;" onerror="this.src='https://logo.svgcdn.com/simple-icons/doordash-dark.svg'; this.style.filter='none'; this.onerror=null;">
+    <div>
+    <h1>Parcel Core Ops &mdash; Daily Site Review</h1>
+    <div class="meta">Operational Day: Monday, April 27, 2026 &nbsp;|&nbsp; 11 Hubs &middot; 56 Spokes &nbsp;|&nbsp; Generated Apr 27, 2026</div>
+    </div>
+  </div>
+  <div class="sources">
+    
+    <span class="src active">✓ OTD (Sigma)</span>
+    
+    <span class="src na">✓ #ask-parcels</span>
+    
+    <span class="src na">✓ TDD DashLink (0 callouts)</span>
+    
+    <span class="src active">✓ Gmail EOS (4/26)</span>
+    
+    <span class="src active">✓ Google Sheets (Roll/Pass Down)</span>
+    
+    <span class="src active">✓ Sigma Exports</span>
+    
+  </div>
+</div>
+
+<div class="kpi-row">
+  
+  <div class="kpi"><div class="label">Network OTD %</div><div class="val" style="color:var(--yellow)">90.00%</div><div class="sub">OKR Daily OTD Misses (4/26)</div><div class="trend down">↓ Worsened v. prior day (94.6)</div></div>
+  
+  <div class="kpi"><div class="label">Network Hub CPT %</div><div class="val" style="color:var(--red)">79.5%</div><div class="sub">Controllable CPT (4/26)</div><div class="trend up">↑ Improved v. prior day (78.6)</div></div>
+  
+  <div class="kpi"><div class="label">Spoke Forecast Var %</div><div class="val" style="color:var(--green)">+9.7%</div><div class="sub">68,836 forecast / 75,502 scanned</div><div class="trend down">↓ Worsened v. prior day (3.7)</div></div>
+  
+  <div class="kpi"><div class="label">Hub Forecast Var %</div><div class="val" style="color:var(--yellow)">-16.0%</div><div class="sub">116,172 forecast / 97,627 scanned</div><div class="trend up">↑ Improved v. prior day (22.3)</div></div>
+  
+  <div class="kpi"><div class="label"># Spokes w/OTD Miss > 0.35%</div><div class="val" style="color:var(--green)">0</div><div class="sub">of 56 spokes (4/26)</div><div class="trend neutral">Same as prior day (0)</div></div>
+  
+  <div class="kpi"><div class="label"># Clean Spokes w/OTD Miss < 0.35%</div><div class="val" style="color:var(--green)">56</div><div class="sub">≤0.35% OTD miss attribution (4/26)</div><div class="trend neutral">Same as prior day (56)</div></div>
+  
+  <div class="kpi"><div class="label"># of Hub EOS Reports Received</div><div class="val" style="color:var(--yellow)">5 / 11</div><div class="sub">DTX-1, EWR-2, LAX-11, LAX-12, ORD-7</div><div class="trend up">↑ Improved v. prior day (4)</div></div>
+  
+  <div class="kpi"><div class="label"># of Sites w/Ask-Parcel Tickets</div><div class="val" style="color:var(--green)">0</div><div class="sub">No tickets</div><div class="trend up">↑ Improved v. prior day (5)</div></div>
+  
+  <div class="kpi"><div class="label"># Liveops Tracked Events</div><div class="val" style="color:">6</div><div class="sub">2 Roll · 4 Pass Down</div><div class="trend up">↑ Improved v. prior day (9)</div></div>
+  
+</div>
+
+<div class="section" style="margin-top:1.2rem; margin-bottom:0;">
+  <div class="section-head">
+    <h2>📋 Operations Summary &mdash; 4/26</h2>
+  </div>
+  <div style="background:var(--card); border:1px solid var(--border); border-radius:10px; padding:1rem 1.4rem; font-size:.85rem; line-height:1.7; color:var(--text);">
+    Network OTD was <strong>90.0%</strong> (declined from 94.64% on prior day), with 0 of 56 reporting spokes above the 0.35% miss attribution threshold.
+
+    Network Hub CPT was <strong>79.5%</strong> (up from 78.6%), driven by LAX-11 (50.0%), ORD-7 (57.1%), DTX-1 (66.7%).
+
+    Hub forecast variance was <strong>-16.0%</strong> (116,172 forecast vs 97,627 scanned).
+
+    LiveOps tracked 2 roll event(s) and 4 pass-down note(s).
+  </div>
+</div>
+
+<!-- ═══════════ HUBS ═══════════ -->
+<div class="section">
+  <div class="section-head">
+    <h2>🚛 Hubs</h2>
+    <span class="badge badge-hub">11 Sites</span>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:70px">Site</th>
+        <th style="width:90px">Sort Partner</th>
+        <th style="width:85px; text-align:center">Forecast Vol</th>
+        <th style="width:85px; text-align:center">Scanned Vol</th>
+        <th style="width:70px; text-align:center">% Var</th>
+        <th style="width:80px; text-align:center">OB CPT %</th>
+        <th style="width:115px">EOS Report</th>
+        <th>EOS Notes</th>
+        <th>#ask-parcels Tickets</th>
+        <th>LiveOps Tracker</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+      <tr>
+        <td class="site-col">ATL-13</td>
+        <td>Staples</td>
+        <td style="text-align:center">12,695</td>
+        <td style="text-align:center">11,660</td>
+        <td style="text-align:center"><span style="color:var(--green)">-8.2%</span></td>
+        <td style="text-align:center"><span style="color:var(--green)">100.0%</span></td>
+        <td class="eos-miss">Missing</td>
+        <td><span class="pending-text">&mdash;</span></td>
+        <td>-</td>
+        <td>-</td>
+      </tr>
+      
+      <tr>
+        <td class="site-col">CRN-1</td>
+        <td>Staples</td>
+        <td style="text-align:center">689</td>
+        <td style="text-align:center">—</td>
+        <td style="text-align:center"><span style="color:var(--dim)">—</span></td>
+        <td style="text-align:center"><span style="color:var(--green)">100.0%</span></td>
+        <td class="eos-miss">Missing</td>
+        <td><span class="pending-text">&mdash;</span></td>
+        <td>-</td>
+        <td>-</td>
+      </tr>
+      
+      <tr>
+        <td class="site-col">DTX-1</td>
+        <td>SpeedX</td>
+        <td style="text-align:center">10,251</td>
+        <td style="text-align:center">5,406</td>
+        <td style="text-align:center"><span style="color:var(--red)">-47.3%</span></td>
+        <td style="text-align:center"><span style="color:var(--red)">66.7%</span></td>
+        <td class="eos-ok">Received</td>
+        <td><span class="pending-text">&mdash;</span></td>
+        <td>-</td>
+        <td>Pass Down &mdash; DTX-1 to HOU-10 (P-38891-2616) original truck broke down, Warp sourced a recovery. EWR-2 had issues with EWR-2 to PHL-7 (1036172) and EWR-2 to PHL-8 (1036193) showing checked-in when not actually on p<br>Pass Down &mdash; Need Uniqlo pick up codes for carriers for next two weeks. Macys_TN needs a 3rd pull Tuesday. DTX-1 needs to advise on 1hr+ late departures: DTX-1 to HOU-10 (P-39011-2616), DTX-1 to ORD-7 (1036213), D<br>Pass Down &mdash; DTX-1 to HOU-10 (P-39011-2616) arrived almost 1 hour late. Warp reached out to driver but no response after tracking went stale - still no reason for the delay. Spreetail Pennsylvania DI truck has bee</td>
+      </tr>
+      
+      <tr>
+        <td class="site-col">EWR-2</td>
+        <td>BroadRange</td>
+        <td style="text-align:center">34,001</td>
+        <td style="text-align:center">31,517</td>
+        <td style="text-align:center"><span style="color:var(--green)">-7.3%</span></td>
+        <td style="text-align:center"><span style="color:var(--yellow)">94.7%</span></td>
+        <td class="eos-ok">Received</td>
+        <td><span class="pending-text">&mdash;</span></td>
+        <td>-</td>
+        <td>Roll &mdash; STORD&rarr;EWR-2 (Sort, 6 plts, Hub Sort/Processing &mdash; STORD rolled due to arriving late.)<br>Pass Down &mdash; DTX-1 to HOU-10 (P-38891-2616) original truck broke down, Warp sourced a recovery. EWR-2 had issues with EWR-2 to PHL-7 (1036172) and EWR-2 to PHL-8 (1036193) showing checked-in when not actually on p</td>
+      </tr>
+      
+      <tr>
+        <td class="site-col">GCO-1</td>
+        <td>Staples</td>
+        <td style="text-align:center">13,487</td>
+        <td style="text-align:center">10,364</td>
+        <td style="text-align:center"><span style="color:var(--yellow)">-23.2%</span></td>
+        <td style="text-align:center"><span style="color:var(--yellow)">90.0%</span></td>
+        <td class="eos-miss">Missing</td>
+        <td><span class="pending-text">&mdash;</span></td>
+        <td>-</td>
+        <td>-</td>
+      </tr>
+      
+      <tr>
+        <td class="site-col">GRE-1</td>
+        <td>Staples</td>
+        <td style="text-align:center">2,026</td>
+        <td style="text-align:center">—</td>
+        <td style="text-align:center"><span style="color:var(--dim)">—</span></td>
+        <td style="text-align:center"><span style="color:var(--green)">100.0%</span></td>
+        <td class="eos-miss">Missing</td>
+        <td><span class="pending-text">&mdash;</span></td>
+        <td>-</td>
+        <td>-</td>
+      </tr>
+      
+      <tr>
+        <td class="site-col">LAX-11</td>
+        <td>Razr</td>
+        <td style="text-align:center">8,332</td>
+        <td style="text-align:center">10,981</td>
+        <td style="text-align:center"><span style="color:var(--red)">+31.8%</span></td>
+        <td style="text-align:center"><span style="color:var(--red)">50.0%</span></td>
+        <td class="eos-ok">Received</td>
+        <td><span class="pending-text">&mdash;</span></td>
+        <td>-</td>
+        <td>Pass Down &mdash; DTX-1 to HOU-10 (P-38891-2616) original truck broke down, Warp sourced a recovery. EWR-2 had issues with EWR-2 to PHL-7 (1036172) and EWR-2 to PHL-8 (1036193) showing checked-in when not actually on p<br>Pass Down &mdash; LAX-11 to EBY-3 57966 (4/27) - Bally requested confirmation as extra pull, awaiting LAX-11 response. HM-IN-1 to ORD-7 1731092431 (4/26) - CHR asked for delivery address because BOL still had Franklin</td>
+      </tr>
+      
+      <tr>
+        <td class="site-col">LAX-12</td>
+        <td>Warp</td>
+        <td style="text-align:center">3,685</td>
+        <td style="text-align:center">3,189</td>
+        <td style="text-align:center"><span style="color:var(--yellow)">-13.5%</span></td>
+        <td style="text-align:center"><span style="color:var(--green)">100.0%</span></td>
+        <td class="eos-ok">Received</td>
+        <td><span class="pending-text">&mdash;</span></td>
+        <td>-</td>
+        <td>-</td>
+      </tr>
+      
+      <tr>
+        <td class="site-col">MCO-1</td>
+        <td>Staples</td>
+        <td style="text-align:center">1,830</td>
+        <td style="text-align:center">—</td>
+        <td style="text-align:center"><span style="color:var(--dim)">—</span></td>
+        <td style="text-align:center"><span style="color:var(--green)">100.0%</span></td>
+        <td class="eos-miss">Missing</td>
+        <td><span class="pending-text">&mdash;</span></td>
+        <td>-</td>
+        <td>-</td>
+      </tr>
+      
+      <tr>
+        <td class="site-col">NYC-1</td>
+        <td>Staples</td>
+        <td style="text-align:center">1,635</td>
+        <td style="text-align:center">1,817</td>
+        <td style="text-align:center"><span style="color:var(--yellow)">+11.1%</span></td>
+        <td style="text-align:center"><span style="color:var(--red)">66.7%</span></td>
+        <td class="eos-miss">Missing</td>
+        <td><span class="pending-text">&mdash;</span></td>
+        <td>-</td>
+        <td>-</td>
+      </tr>
+      
+      <tr>
+        <td class="site-col">ORD-7</td>
+        <td>Warp</td>
+        <td style="text-align:center">27,541</td>
+        <td style="text-align:center">22,693</td>
+        <td style="text-align:center"><span style="color:var(--yellow)">-17.6%</span></td>
+        <td style="text-align:center"><span style="color:var(--red)">57.1%</span></td>
+        <td class="eos-ok">Received</td>
+        <td><span class="pending-text">&mdash;</span></td>
+        <td>-</td>
+        <td>Roll &mdash; TikTok-IL&rarr;ORD-7 (CHR/OMNI, 12 plts, Carrier Dispatch Error &mdash; Omni sub-carrier mistakenly dropped at ORD-6 instead of ORD-7. Discovered when GPS showed delivered but ORD-7 didn't have freight. DashLink senior lea)<br>Pass Down &mdash; LAX-11 to EBY-3 57966 (4/27) - Bally requested confirmation as extra pull, awaiting LAX-11 response. HM-IN-1 to ORD-7 1731092431 (4/26) - CHR asked for delivery address because BOL still had Franklin<br>Pass Down &mdash; Need Uniqlo pick up codes for carriers for next two weeks. Macys_TN needs a 3rd pull Tuesday. DTX-1 needs to advise on 1hr+ late departures: DTX-1 to HOU-10 (P-39011-2616), DTX-1 to ORD-7 (1036213), D</td>
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+<!-- ═══════════ SPOKES ═══════════ -->
+<div class="section">
+  <div class="section-head">
+    <h2>🚗 Spokes</h2>
+    <span class="badge badge-spoke">56 Sites</span>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:70px">Site</th>
+        <th style="width:90px">Sort Partner</th>
+        <th style="width:85px; text-align:center">Forecast Vol</th>
+        <th style="width:85px; text-align:center">Scanned Vol</th>
+        <th style="width:70px; text-align:center">% Var</th>
+        <th style="width:100px; text-align:center">OTD Miss Attrib.</th>
+        <th>#ask-parcels Tickets</th>
+        <th>Staples TDD Callouts</th>
+        <th>LiveOps Tracker</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+      <tr>
+        <td class="site-col">ATL-11</td>
+        <td>Staples</td>
+        <td style="text-align:center">831</td>
+        <td style="text-align:center">924</td>
+        <td style="text-align:center"><span style="color:var(--yellow)">+11.2%</span></td>
+        <td style="text-align:center"><span style="color:var(--green)">0%</span></td>
+        <td>-</td>
+        <td>-</td>
+        <td><span style="font-style:italic; color:var(--green)">No Issues Tracked</span></td>
+      </tr>
+      
+      <tr>
+        <td class="site-col">ATL-12</td>
+        <td>Staples</td>
+        <td style="text-align:center">2,812</td>
+        <td style="text-align:center">3,088</td>
+        <td style="text-align:center"><span style="color:var(--green)">+9.8%</span></td>
+        <td style="text-align:center"><span style="color:var(--green)">0%</span></td>
+        <td>-</td>
+        <td>-</td>
+        <td><span style="font-style:italic; color:var(--green)">No Issues Tracked</span></td>
+      </tr>
+      
+      <tr>
+        <td class="site-col">ATX-5</td>
+        <td>Staples</td>
+        <td style="text-align:center">922</td>
+        <td style="text-align:center">906</td>
+        <td style="text-align:center"><span style="color:var(--green)">-1.7%</span></td>
+        <td style="text-align:center"><span style="color:var(--green)">0%</span></td>
+        <td>-</td>
+        <td>-</td>
+        <td>Pass Down &mdash; Need Uniqlo pick up codes for carriers for next two weeks. Macys_TN needs a 3rd pull Tuesday. DTX-1 needs to advise on 1hr+ late departures: DTX-1 to HOU-10 (P-39011-2616), DTX-1 to ORD-7 (1036213), D</td>
+      </tr>
+      
+      <tr>
+        <td class="site-col">BKN-9</td>
+        <td>BoxHero</td>
+        <td style="text-align:center">1,461</td>
+        <td style="text-align:center">1,807</td>
+        <td style="text-align:center"><span style="color:var(--yellow)">+23.7%</span></td>
+        <td style="text-align:center"><span style="color:var(--green)">0%</span></td>
+        <td>-</td>
+        <td>-</td>
+        <td><span style="font-style:italic; color:var(--green)">No Issues Tracked</span></td>
+      </tr>
+      
+      <tr>
+        <td class="site-col">BLT-3</td>
+        <td>Staples</td>
+        <td style="text-align:center">1,607</td>
+        <td style="text-align:center">1,341</td>
+        <td style="text-align:center"><span style="color:var(--yellow)">-16.6%</span></td>
+        <td style="text-align:center"><span style="color:var(--green)">0%</span></td>
+        <td>-</td>
+        <td>-</td>
+        <td><span style="font-style:italic; color:var(--green)">No Issues Tracked</span></td>
+      </tr>
+      
+      <tr>
+        <td class="site-col">BNX-1</td>
+        <td>Staples</td>
+        <td style="text-align:center">1,418</td>
+        <td style="text-align:center">1,548</td>
+        <td style="text-align:center"><span style="color:var(--green)">+9.2%</span></td>
+        <td style="text-align:center"><span style="color:var(--green)">0%</span></td>
+        <td>-</td>
+        <td>-</td>
+        <td><span style="font-style:italic; color:var(--green)">No Issues Tracked</span></td>
+      </tr>
+      
+      <tr>
+        <td class="site-col">BOS-5</td>
+        <td>Staples</td>
+        <td style="text-align:center">2,079</td>
+        <td style="text-align:center">2,006</td>
+        <td style="text-align:center"><span style="color:var(--green)">-3.5%</span></td>
+        <td style="text-align:center"><span style="color:var(--green)">0%</span></td>
+        <td>-</td>
+        <td>-</td>
+        <td><span style="font-style:italic; color:var(--green)">No Issues Tracked</span></td>
+      </tr>
+      
+      <tr>
+        <td class="site-col">BOS-6</td>
+        <td>Staples</td>
+        <td style="text-align:center">1,814</td>
+        <td style="text-align:center">1,763</td>
+        <td style="text-align:center"><span style="color:var(--green)">-2.8%</span></td>
+        <td style="text-align:center"><span style="color:var(--green)">0%</span></td>
+        <td>-</td>
+        <td>-</td>
+        <td><span style="font-style:italic; color:var(--green)">No Issues Tracked</span></td>
+      </tr>
+      
+      <tr>
+        <td class="site-col">CHI-17</td>
+        <td>Staples</td>
+        <td style="text-align:center">4,843</td>
+        <td style="text-align:center">5,026</td>
+        <td style="text-align:center"><span style="color:var(--green)">+3.8%</span></td>
+        <td style="text-align:center"><span style="color:var(--green)">0%</span></td>
+        <td>-</td>
+        <td>-</td>
+        <td><span style="font-style:italic; color:var(--green)">No Issues Tracked</span></td>
+      </tr>
+      
+      <tr>
+        <td class="site-col">CHI-19</td>
+        <td>Staples</td>
+        <td style="text-align:center">—</td>
+        <td style="text-align:center">—</td>
+        <td style="text-align:center"><span style="color:var(--dim)">—</span></td>
+        <td style="text-align:center"><span style="color:var(--green)">0%</span></td>
+        <td>-</td>
+        <td>-</td>
+        <td><span style="font-style:italic; color:var(--green)">No Issues Tracked</span></td>
+      </tr>
+      
+      <tr>
+        <td class="site-col">CIN-5</td>
+        <td>Staples</td>
+        <td style="text-align:center">1,558</td>
+        <td style="text-align:center">1,270</td>
+        <td style="text-align:center"><span style="color:var(--yellow)">-18.5%</span></td>
+        <td style="text-align:center"><span style="color:var(--green)">0%</span></td>
+        <td>-</td>
+        <td>-</td>
+        <td><span style="font-style:italic; color:var(--green)">No Issues Tracked</span></td>
+      </tr>
+      
+      <tr>
+        <td class="site-col">CLE-7</td>
+        <td>Staples</td>
+        <td style="text-align:center">1,006</td>
+        <td style="text-align:center">1,014</td>
+        <td style="text-align:center"><span style="color:var(--green)">+0.8%</span></td>
+        <td style="text-align:center"><span style="color:var(--green)">0%</span></td>
+        <td>-</td>
+        <td>-</td>
+        <td><span style="font-style:italic; color:var(--green)">No Issues Tracked</span></td>
+      </tr>
+      
+      <tr>
+        <td class="site-col">CLT-3</td>
+        <td>Staples</td>
+        <td style="text-align:center">1,258</td>
+        <td style="text-align:center">1,724</td>
+        <td style="text-align:center"><span style="color:var(--red)">+37.0%</span></td>
+        <td style="text-align:center"><span style="color:var(--green)">0%</span></td>
+        <td>-</td>
+        <td>-</td>
+        <td><span style="font-style:italic; color:var(--green)">No Issues Tracked</span></td>
+      </tr>
+      
+      <tr>
+        <td class="site-col">CLV-1</td>
+        <td>Staples</td>
+        <td style="text-align:center">625</td>
+        <td style="text-align:center">794</td>
+        <td style="text-align:center"><span style="color:var(--red)">+27.0%</span></td>
+        <td style="text-align:center"><span style="color:var(--green)">0%</span></td>
+        <td>-</td>
+        <td>-</td>
+        <td><span style="font-style:italic; color:var(--green)">No Issues Tracked</span></td>
+      </tr>
+      
+      <tr>
+        <td class="site-col">CNJ-2</td>
+        <td>Staples</td>
+        <td style="text-align:center">1,566</td>
+        <td style="text-align:center">1,861</td>
+        <td style="text-align:center"><span style="color:var(--yellow)">+18.8%</span></td>
+        <td style="text-align:center"><span style="color:var(--green)">0%</span></td>
+        <td>-</td>
+        <td>-</td>
+        <td><span style="font-style:italic; color:var(--green)">No Issues Tracked</span></td>
+      </tr>
+      
+      <tr>
+        <td class="site-col">COL-5</td>
+        <td>Staples</td>
+        <td style="text-align:center">969</td>
+        <td style="text-align:center">2,325</td>
+        <td style="text-align:center"><span style="color:var(--red)">+139.9%</span></td>
+        <td style="text-align:center"><span style="color:var(--green)">0%</span></td>
+        <td>-</td>
+        <td>-</td>
+        <td><span style="font-style:italic; color:var(--green)">No Issues Tracked</span></td>
+      </tr>
+      
+      <tr>
+        <td class="site-col">DAL-8</td>
+        <td>Staples</td>
+        <td style="text-align:center">1,312</td>
+        <td style="text-align:center">1,205</td>
+        <td style="text-align:center"><span style="color:var(--green)">-8.2%</span></td>
+        <td style="text-align:center"><span style="color:var(--green)">0%</span></td>
+        <td>-</td>
+        <td>-</td>
+        <td><span style="font-style:italic; color:var(--green)">No Issues Tracked</span></td>
+      </tr>
+      
+      <tr>
+        <td class="site-col">DAL-9</td>
+        <td>Razr</td>
+        <td style="text-align:center">951</td>
+        <td style="text-align:center">1,079</td>
+        <td style="text-align:center"><span style="color:var(--yellow)">+13.5%</span></td>
+        <td style="text-align:center"><span style="color:var(--green)">0%</span></td>
+        <td>-</td>
+        <td>-</td>
+        <td><span style="font-style:italic; color:var(--green)">No Issues Tracked</span></td>
+      </tr>
+      
+      <tr>
+        <td class="site-col">DCA-5</td>
+        <td>Staples</td>
+        <td style="text-align:center">2,751</td>
+        <td style="text-align:center">3,016</td>
+        <td style="text-align:center"><span style="color:var(--green)">+9.6%</span></td>
+        <td style="text-align:center"><span style="color:var(--green)">0%</span></td>
+        <td>-</td>
+        <td>-</td>
+        <td><span style="font-style:italic; color:var(--green)">No Issues Tracked</span></td>
+      </tr>
+      
+      <tr>
+        <td class="site-col">DCA-6</td>
+        <td>Staples</td>
+        <td style="text-align:center">—</td>
+        <td style="text-align:center">—</td>
+        <td style="text-align:center"><span style="color:var(--dim)">—</span></td>
+        <td style="text-align:center"><span style="color:var(--green)">0%</span></td>
+        <td>-</td>
+        <td>-</td>
+        <td><span style="font-style:italic; color:var(--green)">No Issues Tracked</span></td>
+      </tr>
+      
+      <tr>
+        <td class="site-col">DET-13</td>
+        <td>Staples</td>
+        <td style="text-align:center">3,132</td>
+        <td style="text-align:center">2,962</td>
+        <td style="text-align:center"><span style="color:var(--green)">-5.4%</span></td>
+        <td style="text-align:center"><span style="color:var(--green)">0%</span></td>
+        <td>-</td>
+        <td>-</td>
+        <td><span style="font-style:italic; color:var(--green)">No Issues Tracked</span></td>
+      </tr>
+      
+      <tr>
+        <td class="site-col">EBY-3</td>
+        <td>Dedicated</td>
+        <td style="text-align:center">1,948</td>
+        <td style="text-align:center">2,218</td>
+        <td style="text-align:center"><span style="color:var(--yellow)">+13.9%</span></td>
+        <td style="text-align:center"><span style="color:var(--green)">0%</span></td>
+        <td>-</td>
+        <td>-</td>
+        <td>Pass Down &mdash; LAX-11 to EBY-3 57966 (4/27) - Bally requested confirmation as extra pull, awaiting LAX-11 response. HM-IN-1 to ORD-7 1731092431 (4/26) - CHR asked for delivery address because BOL still had Franklin</td>
+      </tr>
+      
+      <tr>
+        <td class="site-col">EBY-7</td>
+        <td>Dedicated</td>
+        <td style="text-align:center">—</td>
+        <td style="text-align:center">—</td>
+        <td style="text-align:center"><span style="color:var(--dim)">—</span></td>
+        <td style="text-align:center"><span style="color:var(--green)">0%</span></td>
+        <td>-</td>
+        <td>-</td>
+        <td><span style="font-style:italic; color:var(--green)">No Issues Tracked</span></td>
+      </tr>
+      
+      <tr>
+        <td class="site-col">HBG-2</td>
+        <td>Staples</td>
+        <td style="text-align:center">526</td>
+        <td style="text-align:center">552</td>
+        <td style="text-align:center"><span style="color:var(--green)">+4.9%</span></td>
+        <td style="text-align:center"><span style="color:var(--green)">0%</span></td>
+        <td>-</td>
+        <td>-</td>
+        <td><span style="font-style:italic; color:var(--green)">No Issues Tracked</span></td>
+      </tr>
+      
+      <tr>
+        <td class="site-col">HFD-3</td>
+        <td>Staples</td>
+        <td style="text-align:center">1,044</td>
+        <td style="text-align:center">1,261</td>
+        <td style="text-align:center"><span style="color:var(--yellow)">+20.8%</span></td>
+        <td style="text-align:center"><span style="color:var(--green)">0%</span></td>
+        <td>-</td>
+        <td>-</td>
+        <td><span style="font-style:italic; color:var(--green)">No Issues Tracked</span></td>
+      </tr>
+      
+      <tr>
+        <td class="site-col">HGR-1</td>
+        <td>Staples</td>
+        <td style="text-align:center">476</td>
+        <td style="text-align:center">384</td>
+        <td style="text-align:center"><span style="color:var(--yellow)">-19.3%</span></td>
+        <td style="text-align:center"><span style="color:var(--green)">0%</span></td>
+        <td>-</td>
+        <td>-</td>
+        <td><span style="font-style:italic; color:var(--green)">No Issues Tracked</span></td>
+      </tr>
+      
+      <tr>
+        <td class="site-col">HOU-10</td>
+        <td>Staples</td>
+        <td style="text-align:center">2,326</td>
+        <td style="text-align:center">2,627</td>
+        <td style="text-align:center"><span style="color:var(--yellow)">+12.9%</span></td>
+        <td style="text-align:center"><span style="color:var(--green)">0%</span></td>
+        <td>-</td>
+        <td>-</td>
+        <td>Pass Down &mdash; DTX-1 to HOU-10 (P-38891-2616) original truck broke down, Warp sourced a recovery. EWR-2 had issues with EWR-2 to PHL-7 (1036172) and EWR-2 to PHL-8 (1036193) showing checked-in when not actually on p<br>Pass Down &mdash; Need Uniqlo pick up codes for carriers for next two weeks. Macys_TN needs a 3rd pull Tuesday. DTX-1 needs to advise on 1hr+ late departures: DTX-1 to HOU-10 (P-39011-2616), DTX-1 to ORD-7 (1036213), D<br>Pass Down &mdash; DTX-1 to HOU-10 (P-39011-2616) arrived almost 1 hour late. Warp reached out to driver but no response after tracking went stale - still no reason for the delay. Spreetail Pennsylvania DI truck has bee</td>
+      </tr>
+      
+      <tr>
+        <td class="site-col">HUD-1</td>
+        <td>Staples</td>
+        <td style="text-align:center">462</td>
+        <td style="text-align:center">452</td>
+        <td style="text-align:center"><span style="color:var(--green)">-2.2%</span></td>
+        <td style="text-align:center"><span style="color:var(--green)">0%</span></td>
+        <td>-</td>
+        <td>-</td>
+        <td><span style="font-style:italic; color:var(--green)">No Issues Tracked</span></td>
+      </tr>
+      
+      <tr>
+        <td class="site-col">INE-11</td>
+        <td>Staples</td>
+        <td style="text-align:center">1,283</td>
+        <td style="text-align:center">1,575</td>
+        <td style="text-align:center"><span style="color:var(--yellow)">+22.8%</span></td>
+        <td style="text-align:center"><span style="color:var(--green)">0%</span></td>
+        <td>-</td>
+        <td>-</td>
+        <td>Pass Down &mdash; DTX-1 to HOU-10 (P-38891-2616) original truck broke down, Warp sourced a recovery. EWR-2 had issues with EWR-2 to PHL-7 (1036172) and EWR-2 to PHL-8 (1036193) showing checked-in when not actually on p</td>
+      </tr>
+      
+      <tr>
+        <td class="site-col">JAX-2</td>
+        <td>Staples</td>
+        <td style="text-align:center">399</td>
+        <td style="text-align:center">430</td>
+        <td style="text-align:center"><span style="color:var(--green)">+7.8%</span></td>
+        <td style="text-align:center"><span style="color:var(--green)">0%</span></td>
+        <td>-</td>
+        <td>-</td>
+        <td><span style="font-style:italic; color:var(--green)">No Issues Tracked</span></td>
+      </tr>
+      
+      <tr>
+        <td class="site-col">LAS-3</td>
+        <td>Staples</td>
+        <td style="text-align:center">696</td>
+        <td style="text-align:center">776</td>
+        <td style="text-align:center"><span style="color:var(--yellow)">+11.5%</span></td>
+        <td style="text-align:center"><span style="color:var(--green)">0%</span></td>
+        <td>-</td>
+        <td>-</td>
+        <td><span style="font-style:italic; color:var(--green)">No Issues Tracked</span></td>
+      </tr>
+      
+      <tr>
+        <td class="site-col">LAV-5</td>
+        <td>Staples</td>
+        <td style="text-align:center">199</td>
+        <td style="text-align:center">257</td>
+        <td style="text-align:center"><span style="color:var(--red)">+29.1%</span></td>
+        <td style="text-align:center"><span style="color:var(--green)">0%</span></td>
+        <td>-</td>
+        <td>-</td>
+        <td>Pass Down &mdash; DTX-1 to HOU-10 (P-38891-2616) original truck broke down, Warp sourced a recovery. EWR-2 had issues with EWR-2 to PHL-7 (1036172) and EWR-2 to PHL-8 (1036193) showing checked-in when not actually on p</td>
+      </tr>
+      
+      <tr>
+        <td class="site-col">LAX-8</td>
+        <td>Warp</td>
+        <td style="text-align:center">2,033</td>
+        <td style="text-align:center">2,236</td>
+        <td style="text-align:center"><span style="color:var(--green)">+10.0%</span></td>
+        <td style="text-align:center"><span style="color:var(--green)">0%</span></td>
+        <td>-</td>
+        <td>-</td>
+        <td><span style="font-style:italic; color:var(--green)">No Issues Tracked</span></td>
+      </tr>
+      
+      <tr>
+        <td class="site-col">LAX-9</td>
+        <td>Staples</td>
+        <td style="text-align:center">2,919</td>
+        <td style="text-align:center">3,298</td>
+        <td style="text-align:center"><span style="color:var(--yellow)">+13.0%</span></td>
+        <td style="text-align:center"><span style="color:var(--green)">0%</span></td>
+        <td>-</td>
+        <td>-</td>
+        <td><span style="font-style:italic; color:var(--green)">No Issues Tracked</span></td>
+      </tr>
+      
+      <tr>
+        <td class="site-col">LIN-1</td>
+        <td>Staples</td>
+        <td style="text-align:center">2,163</td>
+        <td style="text-align:center">2,503</td>
+        <td style="text-align:center"><span style="color:var(--yellow)">+15.7%</span></td>
+        <td style="text-align:center"><span style="color:var(--green)">0%</span></td>
+        <td>-</td>
+        <td>-</td>
+        <td><span style="font-style:italic; color:var(--green)">No Issues Tracked</span></td>
+      </tr>
+      
+      <tr>
+        <td class="site-col">MSP-4</td>
+        <td>Staples</td>
+        <td style="text-align:center">1,906</td>
+        <td style="text-align:center">1,527</td>
+        <td style="text-align:center"><span style="color:var(--yellow)">-19.9%</span></td>
+        <td style="text-align:center"><span style="color:var(--green)">0%</span></td>
+        <td>-</td>
+        <td>-</td>
+        <td><span style="font-style:italic; color:var(--green)">No Issues Tracked</span></td>
+      </tr>
+      
+      <tr>
+        <td class="site-col">MSP-5</td>
+        <td>Staples</td>
+        <td style="text-align:center">—</td>
+        <td style="text-align:center">—</td>
+        <td style="text-align:center"><span style="color:var(--dim)">—</span></td>
+        <td style="text-align:center"><span style="color:var(--green)">0%</span></td>
+        <td>-</td>
+        <td>-</td>
+        <td><span style="font-style:italic; color:var(--green)">No Issues Tracked</span></td>
+      </tr>
+      
+      <tr>
+        <td class="site-col">MSP-6</td>
+        <td>Owen Allen Solutions</td>
+        <td style="text-align:center">388</td>
+        <td style="text-align:center">382</td>
+        <td style="text-align:center"><span style="color:var(--green)">-1.5%</span></td>
+        <td style="text-align:center"><span style="color:var(--green)">0%</span></td>
+        <td>-</td>
+        <td>-</td>
+        <td><span style="font-style:italic; color:var(--green)">No Issues Tracked</span></td>
+      </tr>
+      
+      <tr>
+        <td class="site-col">NAS-2</td>
+        <td>Staples</td>
+        <td style="text-align:center">1,069</td>
+        <td style="text-align:center">1,587</td>
+        <td style="text-align:center"><span style="color:var(--red)">+48.5%</span></td>
+        <td style="text-align:center"><span style="color:var(--green)">0%</span></td>
+        <td>-</td>
+        <td>-</td>
+        <td><span style="font-style:italic; color:var(--green)">No Issues Tracked</span></td>
+      </tr>
+      
+      <tr>
+        <td class="site-col">NNJ-5</td>
+        <td>Dedicated</td>
+        <td style="text-align:center">1,511</td>
+        <td style="text-align:center">1,829</td>
+        <td style="text-align:center"><span style="color:var(--yellow)">+21.0%</span></td>
+        <td style="text-align:center"><span style="color:var(--green)">0%</span></td>
+        <td>-</td>
+        <td>-</td>
+        <td><span style="font-style:italic; color:var(--green)">No Issues Tracked</span></td>
+      </tr>
+      
+      <tr>
+        <td class="site-col">NNJ-6</td>
+        <td>Staples</td>
+        <td style="text-align:center">819</td>
+        <td style="text-align:center">1,033</td>
+        <td style="text-align:center"><span style="color:var(--red)">+26.1%</span></td>
+        <td style="text-align:center"><span style="color:var(--green)">0%</span></td>
+        <td>-</td>
+        <td>-</td>
+        <td><span style="font-style:italic; color:var(--green)">No Issues Tracked</span></td>
+      </tr>
+      
+      <tr>
+        <td class="site-col">OCO-1</td>
+        <td>Razr</td>
+        <td style="text-align:center">1,577</td>
+        <td style="text-align:center">1,816</td>
+        <td style="text-align:center"><span style="color:var(--yellow)">+15.2%</span></td>
+        <td style="text-align:center"><span style="color:var(--green)">0%</span></td>
+        <td>-</td>
+        <td>-</td>
+        <td><span style="font-style:italic; color:var(--green)">No Issues Tracked</span></td>
+      </tr>
+      
+      <tr>
+        <td class="site-col">ORL-3</td>
+        <td>Staples</td>
+        <td style="text-align:center">575</td>
+        <td style="text-align:center">579</td>
+        <td style="text-align:center"><span style="color:var(--green)">+0.7%</span></td>
+        <td style="text-align:center"><span style="color:var(--green)">0%</span></td>
+        <td>-</td>
+        <td>-</td>
+        <td><span style="font-style:italic; color:var(--green)">No Issues Tracked</span></td>
+      </tr>
+      
+      <tr>
+        <td class="site-col">PHL-7</td>
+        <td>Staples</td>
+        <td style="text-align:center">993</td>
+        <td style="text-align:center">955</td>
+        <td style="text-align:center"><span style="color:var(--green)">-3.8%</span></td>
+        <td style="text-align:center"><span style="color:var(--green)">0%</span></td>
+        <td>-</td>
+        <td>-</td>
+        <td>Pass Down &mdash; DTX-1 to HOU-10 (P-38891-2616) original truck broke down, Warp sourced a recovery. EWR-2 had issues with EWR-2 to PHL-7 (1036172) and EWR-2 to PHL-8 (1036193) showing checked-in when not actually on p</td>
+      </tr>
+      
+      <tr>
+        <td class="site-col">PHL-8</td>
+        <td>Flexe</td>
+        <td style="text-align:center">1,931</td>
+        <td style="text-align:center">1,867</td>
+        <td style="text-align:center"><span style="color:var(--green)">-3.3%</span></td>
+        <td style="text-align:center"><span style="color:var(--green)">0%</span></td>
+        <td>-</td>
+        <td>-</td>
+        <td>Pass Down &mdash; DTX-1 to HOU-10 (P-38891-2616) original truck broke down, Warp sourced a recovery. EWR-2 had issues with EWR-2 to PHL-7 (1036172) and EWR-2 to PHL-8 (1036193) showing checked-in when not actually on p</td>
+      </tr>
+      
+      <tr>
+        <td class="site-col">PHX-8</td>
+        <td>Staples</td>
+        <td style="text-align:center">913</td>
+        <td style="text-align:center">983</td>
+        <td style="text-align:center"><span style="color:var(--green)">+7.7%</span></td>
+        <td style="text-align:center"><span style="color:var(--green)">0%</span></td>
+        <td>-</td>
+        <td>-</td>
+        <td><span style="font-style:italic; color:var(--green)">No Issues Tracked</span></td>
+      </tr>
+      
+      <tr>
+        <td class="site-col">PIT-2</td>
+        <td>Staples</td>
+        <td style="text-align:center">1,086</td>
+        <td style="text-align:center">1,180</td>
+        <td style="text-align:center"><span style="color:var(--green)">+8.7%</span></td>
+        <td style="text-align:center"><span style="color:var(--green)">0%</span></td>
+        <td>-</td>
+        <td>-</td>
+        <td><span style="font-style:italic; color:var(--green)">No Issues Tracked</span></td>
+      </tr>
+      
+      <tr>
+        <td class="site-col">QNS-2</td>
+        <td>Staples</td>
+        <td style="text-align:center">1,412</td>
+        <td style="text-align:center">1,484</td>
+        <td style="text-align:center"><span style="color:var(--green)">+5.1%</span></td>
+        <td style="text-align:center"><span style="color:var(--green)">0%</span></td>
+        <td>-</td>
+        <td>-</td>
+        <td><span style="font-style:italic; color:var(--green)">No Issues Tracked</span></td>
+      </tr>
+      
+      <tr>
+        <td class="site-col">RAL-3</td>
+        <td>Staples</td>
+        <td style="text-align:center">1,016</td>
+        <td style="text-align:center">1,051</td>
+        <td style="text-align:center"><span style="color:var(--green)">+3.4%</span></td>
+        <td style="text-align:center"><span style="color:var(--green)">0%</span></td>
+        <td>-</td>
+        <td>-</td>
+        <td><span style="font-style:italic; color:var(--green)">No Issues Tracked</span></td>
+      </tr>
+      
+      <tr>
+        <td class="site-col">RIC-2</td>
+        <td>Staples</td>
+        <td style="text-align:center">424</td>
+        <td style="text-align:center">566</td>
+        <td style="text-align:center"><span style="color:var(--red)">+33.5%</span></td>
+        <td style="text-align:center"><span style="color:var(--green)">0%</span></td>
+        <td>-</td>
+        <td>-</td>
+        <td><span style="font-style:italic; color:var(--green)">No Issues Tracked</span></td>
+      </tr>
+      
+      <tr>
+        <td class="site-col">SAC-4</td>
+        <td>Staples</td>
+        <td style="text-align:center">626</td>
+        <td style="text-align:center">699</td>
+        <td style="text-align:center"><span style="color:var(--yellow)">+11.7%</span></td>
+        <td style="text-align:center"><span style="color:var(--green)">0%</span></td>
+        <td>-</td>
+        <td>-</td>
+        <td><span style="font-style:italic; color:var(--green)">No Issues Tracked</span></td>
+      </tr>
+      
+      <tr>
+        <td class="site-col">SAC-5</td>
+        <td>Staples</td>
+        <td style="text-align:center">—</td>
+        <td style="text-align:center">—</td>
+        <td style="text-align:center"><span style="color:var(--dim)">—</span></td>
+        <td style="text-align:center"><span style="color:var(--green)">0%</span></td>
+        <td>-</td>
+        <td>-</td>
+        <td><span style="font-style:italic; color:var(--green)">No Issues Tracked</span></td>
+      </tr>
+      
+      <tr>
+        <td class="site-col">SAT-4</td>
+        <td>Staples</td>
+        <td style="text-align:center">576</td>
+        <td style="text-align:center">646</td>
+        <td style="text-align:center"><span style="color:var(--yellow)">+12.2%</span></td>
+        <td style="text-align:center"><span style="color:var(--green)">0%</span></td>
+        <td>-</td>
+        <td>-</td>
+        <td>Pass Down &mdash; Need Uniqlo pick up codes for carriers for next two weeks. Macys_TN needs a 3rd pull Tuesday. DTX-1 needs to advise on 1hr+ late departures: DTX-1 to HOU-10 (P-39011-2616), DTX-1 to ORD-7 (1036213), D</td>
+      </tr>
+      
+      <tr>
+        <td class="site-col">SND-3</td>
+        <td>Staples</td>
+        <td style="text-align:center">1,449</td>
+        <td style="text-align:center">1,673</td>
+        <td style="text-align:center"><span style="color:var(--yellow)">+15.5%</span></td>
+        <td style="text-align:center"><span style="color:var(--green)">0%</span></td>
+        <td>-</td>
+        <td>-</td>
+        <td><span style="font-style:italic; color:var(--green)">No Issues Tracked</span></td>
+      </tr>
+      
+      <tr>
+        <td class="site-col">TPA-4</td>
+        <td>Staples</td>
+        <td style="text-align:center">700</td>
+        <td style="text-align:center">636</td>
+        <td style="text-align:center"><span style="color:var(--green)">-9.1%</span></td>
+        <td style="text-align:center"><span style="color:var(--green)">0%</span></td>
+        <td>-</td>
+        <td>-</td>
+        <td><span style="font-style:italic; color:var(--green)">No Issues Tracked</span></td>
+      </tr>
+      
+      <tr>
+        <td class="site-col">VAB-4</td>
+        <td>Staples</td>
+        <td style="text-align:center">476</td>
+        <td style="text-align:center">781</td>
+        <td style="text-align:center"><span style="color:var(--red)">+64.1%</span></td>
+        <td style="text-align:center"><span style="color:var(--green)">0%</span></td>
+        <td>-</td>
+        <td>-</td>
+        <td><span style="font-style:italic; color:var(--green)">No Issues Tracked</span></td>
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+<div class="footer">
+  Parcel Core Ops Daily Site Review &nbsp;•&nbsp; Op Day 4/27/2026 (Monday) &nbsp;•&nbsp; Sources: Sigma Exports (Hub Vol, CPT, OTD, Spoke Vol) · Gmail EOS (5/11) · #ask-parcels (0 tickets, 0 sites) · Google Sheets (2 Roll · 4 Pass Down) · TDD DashLink (0 callouts: none)
+</div>
+
+</body>
+</html>
